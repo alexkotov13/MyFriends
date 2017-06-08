@@ -12,6 +12,7 @@
 		958711011EE84D9F000E0C51 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958711001EE84D9F000E0C51 /* CoreData.framework */; };
 		9589FED21EE920A400CE3004 /* MyFriends.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9589FED01EE920A400CE3004 /* MyFriends.xcdatamodeld */; };
 		9589FED51EE9214F00CE3004 /* UserInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9589FED41EE9214F00CE3004 /* UserInformationViewController.m */; };
+		9589FF111EE927E900CE3004 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9589FF101EE927E900CE3004 /* photo.jpg */; };
 		958B71E31EE6D94300D3AC24 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958B71E21EE6D94300D3AC24 /* UIKit.framework */; };
 		958B71E51EE6D94300D3AC24 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958B71E41EE6D94300D3AC24 /* Foundation.framework */; };
 		958B71E71EE6D94300D3AC24 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958B71E61EE6D94300D3AC24 /* CoreGraphics.framework */; };
@@ -34,6 +35,7 @@
 		9589FED11EE920A400CE3004 /* MyFriends.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyFriends.xcdatamodel; sourceTree = "<group>"; };
 		9589FED31EE9214F00CE3004 /* UserInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInformationViewController.h; sourceTree = "<group>"; };
 		9589FED41EE9214F00CE3004 /* UserInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInformationViewController.m; sourceTree = "<group>"; };
+		9589FF101EE927E900CE3004 /* photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = photo.jpg; path = ../../../Downloads/photo.jpg; sourceTree = "<group>"; };
 		958B71DF1EE6D94300D3AC24 /* MyFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		958B71E21EE6D94300D3AC24 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		958B71E41EE6D94300D3AC24 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -74,6 +76,7 @@
 			children = (
 				958B72001EE6D94300D3AC24 /* ViewController.h */,
 				958B72011EE6D94300D3AC24 /* ViewController.m */,
+				9589FF101EE927E900CE3004 /* photo.jpg */,
 				9589FED31EE9214F00CE3004 /* UserInformationViewController.h */,
 				9589FED41EE9214F00CE3004 /* UserInformationViewController.m */,
 			);
@@ -204,6 +207,7 @@
 				958B71F91EE6D94300D3AC24 /* Default-568h@2x.png in Resources */,
 				958B71FC1EE6D94300D3AC24 /* MainStoryboard_iPhone.storyboard in Resources */,
 				958B71FF1EE6D94300D3AC24 /* MainStoryboard_iPad.storyboard in Resources */,
+				9589FF111EE927E900CE3004 /* photo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
