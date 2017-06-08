@@ -8,16 +8,15 @@
 
 
 #import <UIKit/UIKit.h>
-#import "AppearanceManager.h"
 #import "UserInformationViewController.h"
-#import <CoreData/CoreData.h>
+#import "CoreDataManager.h"
+#import "FriendDescription.h"
 
 
-//@class UserInformationViewController;
 
 @interface ViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
-@property (strong, nonatomic) UserInformationViewController *userInformationViewController;
+
 
 
 @property(nonatomic, readwrite) UIButton *exitButton;

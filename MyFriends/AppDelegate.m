@@ -21,10 +21,6 @@
     self.window.rootViewController = navigationController;
     //mainViewController.managedObjectContext = self.managedObjectContext;
     [self.window makeKeyAndVisible];
-   // [mainViewController release];
-    mainViewController = nil;
-    //[navigationController release];
-    navigationController = nil;
     return YES;
 }
 #pragma mark - Application's Documents directory

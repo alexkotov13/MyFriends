@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "PointDescription.h"
-//#import "CoreDataManager.h"
+#import "CoreDataManager.h"
+#import "CoreData/CoreData.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

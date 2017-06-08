@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-//#import "UserInformationViewController.h"
+#import "AppearanceManager.h"
 #define COORDINATE 5
 #define X_COORDINATE_FOR_LABEL 50
 #define SIZE 35
@@ -36,9 +36,18 @@
     [[AppearanceManager shared] customizeTopNavigationBarAppearance:self.navigationController.navigationBar];  
     
     //[[AppearanceManager shared] customizeViewController:self.view];
-    self.viewScreen = self.view.bounds.size;
-    
+    self.viewScreen = self.view.bounds.size;    
     [self drawButton];
+    
+    //_fetchedResultsController = [[CoreDataManager sharedInstance].fetchedResultsController];
+    _fetchedResultsController.delegate = self;
+    [NSFetchedResultsController deleteCacheWithName:@"Root"];
+    NSError *error;
+	if (![[self fetchedResultsController] performFetch:&error])
+    {
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		exit(-1);  // Fail
+	}
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -59,8 +68,23 @@
 
 -(void)insertNewObject
 {
-   UITableView *tableView = self.tableView; 
-   [self configureCell:[tableView cellForRowAtIndexPath:1] atIndexPath:""];
+    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
+    NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+    
+    // If appropriate, configure the new managed object.
+    // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
+    [newManagedObject setValue:@"First Name" forKey:@"firstName"];
+    [newManagedObject setValue:@"Last Name" forKey:@"lastName"];
+    
+    // Save the context.
+    NSError *error = nil;
+    if (![context save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
 }
 
 -(void)exitButtonClick:(id)sender
@@ -91,15 +115,15 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //if (editingStyle == UITableViewCellEditingStyleDelete)
-    //{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
         // Delete the managed object for the given index path
-        //NSManagedObjectContext *context = [[CoreDataManager sharedInstance] managedObjectContext];
-        //PointDescription *info = [_fetchedResultsController objectAtIndexPath:indexPath];
-        //[context deleteObject:info];
+        NSManagedObjectContext *context = [[CoreDataManager sharedInstance] managedObjectContext];
+        FriendDescription *info = [_fetchedResultsController objectAtIndexPath:indexPath];
+        [context deleteObject:info];
         
-        //[[CoreDataManager sharedInstance] saveContext];
-    //}
+        [[CoreDataManager sharedInstance] saveContext];
+    }
     
 }
 
@@ -118,32 +142,22 @@
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    //PointDescription *info = [_fetchedResultsController objectAtIndexPath:indexPath];
+    FriendDescription *info = [_fetchedResultsController objectAtIndexPath:indexPath];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(COORDINATE, COORDINATE, SIZE, SIZE)];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
-    //UIImage *smallImage = [info thumbnail];
-    UIImage *smallImage = [[UIImage alloc] initWithContentsOfFile:@"photo.jpg"];
+    UIImage *smallImage = [info thumbnail];
+    //UIImage *smallImage = [[UIImage alloc] initWithContentsOfFile:@"photo.jpg"];
     imageView.image = smallImage;
     [cell addSubview:imageView];
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(X_COORDINATE_FOR_LABEL, COORDINATE, self.view.frame.size.width - SIZE * 2, SIZE)];
-    label.text = @"123"; //info.titleForPin;
+    label.text = info.titleFriend;
     [cell addSubview:label];
-    //imageView = nil;
-    //[imageView release];
-    //label = nil;
-    //[label release];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (!self.userInformationViewController) {
-        self.userInformationViewController = [[UserInformationViewController alloc] initWithNibName:@"UserInformationViewController"
-                                                                           bundle:nil];
-    }
-    //NSManagedObject *selectedObject = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-    //self.userInformationViewController.detailItem = selectedObject;
-    //self.userInformationViewController.delegate = self;
-    [self.navigationController pushViewController:self.userInformationViewController animated:YES];
+{     
+    UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc] initWithIndexOfObject:indexPath];
+    [self.navigationController pushViewController:userInformationViewController animated:YES];
 }
 
 

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FriendDescription.h"
 
 @interface UserInformationViewController : UIViewController
 
+-(id)initWithIndexOfObject:(NSIndexPath *)indexPath;
 @end

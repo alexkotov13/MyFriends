@@ -9,16 +9,18 @@
 #import "UserInformationViewController.h"
 
 @interface UserInformationViewController ()
-
+// NSIndexPath* _indexPath;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @end
 
 @implementation UserInformationViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(id)initWithIndexOfObject:(NSIndexPath *)indexPath
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    self = [super init];
+    if(self)
+    {
+        indexPath = [indexPath init];
     }
     return self;
 }
