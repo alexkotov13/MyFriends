@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		958710FD1EE84D3C000E0C51 /* AppearanceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 958710FC1EE84D3C000E0C51 /* AppearanceManager.m */; };
+		958710FF1EE84D97000E0C51 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958710FE1EE84D97000E0C51 /* QuartzCore.framework */; };
+		958711011EE84D9F000E0C51 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958711001EE84D9F000E0C51 /* CoreData.framework */; };
+		9589FED21EE920A400CE3004 /* MyFriends.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9589FED01EE920A400CE3004 /* MyFriends.xcdatamodeld */; };
+		9589FED51EE9214F00CE3004 /* UserInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9589FED41EE9214F00CE3004 /* UserInformationViewController.m */; };
 		958B71E31EE6D94300D3AC24 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958B71E21EE6D94300D3AC24 /* UIKit.framework */; };
 		958B71E51EE6D94300D3AC24 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958B71E41EE6D94300D3AC24 /* Foundation.framework */; };
 		958B71E71EE6D94300D3AC24 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958B71E61EE6D94300D3AC24 /* CoreGraphics.framework */; };
@@ -22,6 +27,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		958710FB1EE84D3C000E0C51 /* AppearanceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearanceManager.h; sourceTree = "<group>"; };
+		958710FC1EE84D3C000E0C51 /* AppearanceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearanceManager.m; sourceTree = "<group>"; };
+		958710FE1EE84D97000E0C51 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		958711001EE84D9F000E0C51 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9589FED11EE920A400CE3004 /* MyFriends.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyFriends.xcdatamodel; sourceTree = "<group>"; };
+		9589FED31EE9214F00CE3004 /* UserInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInformationViewController.h; sourceTree = "<group>"; };
+		9589FED41EE9214F00CE3004 /* UserInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInformationViewController.m; sourceTree = "<group>"; };
 		958B71DF1EE6D94300D3AC24 /* MyFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		958B71E21EE6D94300D3AC24 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		958B71E41EE6D94300D3AC24 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -46,6 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				958711011EE84D9F000E0C51 /* CoreData.framework in Frameworks */,
+				958710FF1EE84D97000E0C51 /* QuartzCore.framework in Frameworks */,
 				958B71E31EE6D94300D3AC24 /* UIKit.framework in Frameworks */,
 				958B71E51EE6D94300D3AC24 /* Foundation.framework in Frameworks */,
 				958B71E71EE6D94300D3AC24 /* CoreGraphics.framework in Frameworks */,
@@ -55,6 +69,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9589FECE1EE91FBC00CE3004 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				958B72001EE6D94300D3AC24 /* ViewController.h */,
+				958B72011EE6D94300D3AC24 /* ViewController.m */,
+				9589FED31EE9214F00CE3004 /* UserInformationViewController.h */,
+				9589FED41EE9214F00CE3004 /* UserInformationViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9589FECF1EE91FDF00CE3004 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				9589FED01EE920A400CE3004 /* MyFriends.xcdatamodeld */,
+				958B71F11EE6D94300D3AC24 /* AppDelegate.h */,
+				958B71F21EE6D94300D3AC24 /* AppDelegate.m */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		958B71D61EE6D94300D3AC24 = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +110,8 @@
 		958B71E11EE6D94300D3AC24 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				958711001EE84D9F000E0C51 /* CoreData.framework */,
+				958710FE1EE84D97000E0C51 /* QuartzCore.framework */,
 				958B71E21EE6D94300D3AC24 /* UIKit.framework */,
 				958B71E41EE6D94300D3AC24 /* Foundation.framework */,
 				958B71E61EE6D94300D3AC24 /* CoreGraphics.framework */,
@@ -85,12 +122,12 @@
 		958B71E81EE6D94300D3AC24 /* MyFriends */ = {
 			isa = PBXGroup;
 			children = (
-				958B71F11EE6D94300D3AC24 /* AppDelegate.h */,
-				958B71F21EE6D94300D3AC24 /* AppDelegate.m */,
-				958B71FA1EE6D94300D3AC24 /* MainStoryboard_iPhone.storyboard */,
+				9589FECE1EE91FBC00CE3004 /* ViewControllers */,
+				9589FECF1EE91FDF00CE3004 /* CoreData */,
 				958B71FD1EE6D94300D3AC24 /* MainStoryboard_iPad.storyboard */,
-				958B72001EE6D94300D3AC24 /* ViewController.h */,
-				958B72011EE6D94300D3AC24 /* ViewController.m */,
+				958B71FA1EE6D94300D3AC24 /* MainStoryboard_iPhone.storyboard */,
+				958710FB1EE84D3C000E0C51 /* AppearanceManager.h */,
+				958710FC1EE84D3C000E0C51 /* AppearanceManager.m */,
 				958B71E91EE6D94300D3AC24 /* Supporting Files */,
 			);
 			path = MyFriends;
@@ -180,6 +217,9 @@
 				958B71EF1EE6D94300D3AC24 /* main.m in Sources */,
 				958B71F31EE6D94300D3AC24 /* AppDelegate.m in Sources */,
 				958B72021EE6D94300D3AC24 /* ViewController.m in Sources */,
+				958710FD1EE84D3C000E0C51 /* AppearanceManager.m in Sources */,
+				9589FED21EE920A400CE3004 /* MyFriends.xcdatamodeld in Sources */,
+				9589FED51EE9214F00CE3004 /* UserInformationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,8 +352,22 @@
 				958B72071EE6D94300D3AC24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9589FED01EE920A400CE3004 /* MyFriends.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9589FED11EE920A400CE3004 /* MyFriends.xcdatamodel */,
+			);
+			currentVersion = 9589FED11EE920A400CE3004 /* MyFriends.xcdatamodel */;
+			path = MyFriends.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 958B71D71EE6D94300D3AC24 /* Project object */;
 }
