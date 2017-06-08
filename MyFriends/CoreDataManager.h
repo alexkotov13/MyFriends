@@ -12,11 +12,12 @@
 
 @interface CoreDataManager : NSObject
 
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) NSManagedObjectContext *subContext;
+@property (nonatomic, readwrite) NSFetchedResultsController *fetchedResultsController;
+@property NSManagedObjectContext *managedObjectContext;
+//@property NSManagedObjectContext *subContext;
 
 + (CoreDataManager *)sharedInstance;
+- (NSFetchedResultsController *)fetchedResultsController;
 - (void)saveContext;
 
 @end

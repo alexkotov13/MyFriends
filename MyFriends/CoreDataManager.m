@@ -11,8 +11,8 @@
 
 @interface CoreDataManager()
 
-@property (nonatomic, retain) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, retain) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @end
 
@@ -21,7 +21,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize fetchedResultsController = _fetchedResultsController;
-@synthesize subContext = _subContext;
+//@synthesize subContext = _subCon text;
 
 static CoreDataManager *sharedManager = nil;
 
@@ -49,37 +49,38 @@ static CoreDataManager *sharedManager = nil;
     if (self)
     {
         [self setupManagedObjectContext];
-        [self setupNewManagedObjectContext];
+//        [self setupNewManagedObjectContext];
     }
     return self;
 }
 
--(void)setupNewManagedObjectContext
-{
-    _subContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    _subContext.parentContext = self.managedObjectContext;
-}
+//-(void)setupNewManagedObjectContext
+//{
+//    _subContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+//    _subContext.parentContext = self.managedObjectContext;
+//}
 
 - (void)setupManagedObjectContext
-{
+{ 
+    
     NSFileManager* fileManager = [NSFileManager defaultManager];
     NSURL* documentDirectoryURL = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0];
-    NSURL* persistentURL = [documentDirectoryURL URLByAppendingPathComponent:@"MyFriends.sqlite"];
-    NSURL* modelURL = [[NSBundle mainBundle] URLForResource:@"MyFriends" withExtension:@"momd"];
+    NSURL* persistentURL = [documentDirectoryURL URLByAppendingPathComponent:@"FriendsModel.sqlite"];
+    NSURL* modelURL = [[NSBundle mainBundle] URLForResource:@"FriendsModel" withExtension:@"momd"];
     self.managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     self.persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
     NSError* error = nil;
-    NSPersistentStore* persistentStore = [self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:persistentURL options:nil error:&error];
-    if (persistentStore)
-    {
-        self.managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        self.managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
-    }
+   if([self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:persistentURL options:nil error:&error])
+   {
+       self.managedObjectContext = [[NSManagedObjectContext alloc] init];
+       self.managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
+   }
     else
     {
         NSLog(@"ERROR: %@", error.description);
     }
 }
+
 
 - (void)saveContext
 {

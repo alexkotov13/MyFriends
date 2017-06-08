@@ -10,7 +10,7 @@
 		958710FD1EE84D3C000E0C51 /* AppearanceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 958710FC1EE84D3C000E0C51 /* AppearanceManager.m */; };
 		958710FF1EE84D97000E0C51 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958710FE1EE84D97000E0C51 /* QuartzCore.framework */; };
 		958711011EE84D9F000E0C51 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958711001EE84D9F000E0C51 /* CoreData.framework */; };
-		9589FED21EE920A400CE3004 /* MyFriends.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9589FED01EE920A400CE3004 /* MyFriends.xcdatamodeld */; };
+		9589FED21EE920A400CE3004 /* FriendsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9589FED01EE920A400CE3004 /* FriendsModel.xcdatamodeld */; };
 		9589FED51EE9214F00CE3004 /* UserInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9589FED41EE9214F00CE3004 /* UserInformationViewController.m */; };
 		9589FF111EE927E900CE3004 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9589FF101EE927E900CE3004 /* photo.jpg */; };
 		9589FF141EE942E900CE3004 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9589FF131EE942E900CE3004 /* CoreDataManager.m */; };
@@ -34,7 +34,7 @@
 		958710FC1EE84D3C000E0C51 /* AppearanceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearanceManager.m; sourceTree = "<group>"; };
 		958710FE1EE84D97000E0C51 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		958711001EE84D9F000E0C51 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		9589FED11EE920A400CE3004 /* MyFriends.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyFriends.xcdatamodel; sourceTree = "<group>"; };
+		9589FED11EE920A400CE3004 /* FriendsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FriendsModel.xcdatamodel; sourceTree = "<group>"; };
 		9589FED31EE9214F00CE3004 /* UserInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInformationViewController.h; sourceTree = "<group>"; };
 		9589FED41EE9214F00CE3004 /* UserInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInformationViewController.m; sourceTree = "<group>"; };
 		9589FF101EE927E900CE3004 /* photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = photo.jpg; path = ../../../Downloads/photo.jpg; sourceTree = "<group>"; };
@@ -92,7 +92,6 @@
 		9589FECF1EE91FDF00CE3004 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				9589FED01EE920A400CE3004 /* MyFriends.xcdatamodeld */,
 				958B71F11EE6D94300D3AC24 /* AppDelegate.h */,
 				958B71F21EE6D94300D3AC24 /* AppDelegate.m */,
 				9589FF121EE942E900CE3004 /* CoreDataManager.h */,
@@ -133,6 +132,7 @@
 		958B71E81EE6D94300D3AC24 /* MyFriends */ = {
 			isa = PBXGroup;
 			children = (
+				9589FED01EE920A400CE3004 /* FriendsModel.xcdatamodeld */,
 				9589FECE1EE91FBC00CE3004 /* ViewControllers */,
 				9589FECF1EE91FDF00CE3004 /* CoreData */,
 				958B71FD1EE6D94300D3AC24 /* MainStoryboard_iPad.storyboard */,
@@ -232,7 +232,7 @@
 				958B71F31EE6D94300D3AC24 /* AppDelegate.m in Sources */,
 				958B72021EE6D94300D3AC24 /* ViewController.m in Sources */,
 				958710FD1EE84D3C000E0C51 /* AppearanceManager.m in Sources */,
-				9589FED21EE920A400CE3004 /* MyFriends.xcdatamodeld in Sources */,
+				9589FED21EE920A400CE3004 /* FriendsModel.xcdatamodeld in Sources */,
 				9589FED51EE9214F00CE3004 /* UserInformationViewController.m in Sources */,
 				9589FF141EE942E900CE3004 /* CoreDataManager.m in Sources */,
 				9589FF171EE9516900CE3004 /* FriendDescription.m in Sources */,
@@ -373,13 +373,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		9589FED01EE920A400CE3004 /* MyFriends.xcdatamodeld */ = {
+		9589FED01EE920A400CE3004 /* FriendsModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				9589FED11EE920A400CE3004 /* MyFriends.xcdatamodel */,
+				9589FED11EE920A400CE3004 /* FriendsModel.xcdatamodel */,
 			);
-			currentVersion = 9589FED11EE920A400CE3004 /* MyFriends.xcdatamodel */;
-			path = MyFriends.xcdatamodeld;
+			currentVersion = 9589FED11EE920A400CE3004 /* FriendsModel.xcdatamodel */;
+			path = FriendsModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
