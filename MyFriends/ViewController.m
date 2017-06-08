@@ -28,7 +28,7 @@
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
      [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.leftBarButtonItem];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];
     self.navigationItem.rightBarButtonItem = addButton;
     [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.rightBarButtonItem];
     
@@ -71,12 +71,19 @@
     NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
     NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
     
-    // If appropriate, configure the new managed object.
-    // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
     [newManagedObject setValue:@"First Name" forKey:@"firstName"];
     //[newManagedObject setValue:@"Last Name" forKey:@"lastName"];
     
-    [[CoreDataManager sharedInstance] saveContext];
+    [self saveContext];
+}
+- (void)saveContext {
+    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
 }
 
 -(void)exitButtonClick:(id)sender
@@ -120,9 +127,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+{    
      static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
@@ -137,12 +144,13 @@
     FriendDescription *info = [_fetchedResultsController objectAtIndexPath:indexPath];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(COORDINATE, COORDINATE, SIZE, SIZE)];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
-    UIImage *smallImage = [info thumbnail];
-    //UIImage *smallImage = [[UIImage alloc] initWithContentsOfFile:@"photo.jpg"];
+   // UIImage *smallImage = [info thumbnail];
+    UIImage *smallImage = [[UIImage alloc] initWithContentsOfFile:@"Images/Yuliya.jpg"];
     imageView.image = smallImage;
     [cell addSubview:imageView];
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(X_COORDINATE_FOR_LABEL, COORDINATE, self.view.frame.size.width - SIZE * 2, SIZE)];
-    label.text = info.titleFriend;
+    //label.text = info.titleFriend;
+    label.text = @"Yuliya";
     [cell addSubview:label];
 }
 

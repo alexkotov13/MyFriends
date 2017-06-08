@@ -19,11 +19,16 @@
 @dynamic titleFriend;
 @dynamic thumbnail;
 
+- (NSString *)documentsDicrectory
+{
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+}
+
 -(void)setImagePathWithImage:(UIImage *)image
 {
     NSDate* now = [NSDate date];
     NSString* caldate = [now description];
-    NSString* recorderFilePath = [NSString stringWithFormat:@"%@/.png", caldate];
+    NSString* recorderFilePath = [NSString stringWithFormat:@"%@/%@.png", [self documentsDicrectory], caldate];
     NSData* data = UIImageJPEGRepresentation(image, 1.0f);
     [data writeToFile:recorderFilePath atomically:YES];
     self.imagePath = recorderFilePath;
