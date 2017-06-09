@@ -68,8 +68,8 @@
     
     [newManagedObject setValue:@"First Name" forKey:@"firstName"];
     [newManagedObject setValue:@"Last Name" forKey:@"lastName"];
-    UIImage *image = [UIImage imageNamed:@"photo.jpg"];
-    [newManagedObject setValue:UIImageJPEGRepresentation(image, SIZE) forKey:@"image"];
+    //UIImage *image = [UIImage imageNamed:@"photo.jpg"];
+    //[newManagedObject setValue:UIImageJPEGRepresentation(image, SIZE) forKey:@"image"];
     
     [self saveContext];
 }
