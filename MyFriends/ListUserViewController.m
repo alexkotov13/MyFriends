@@ -1,38 +1,37 @@
 //
-//  ViewController.m
+//  ListUserViewController.m
 //  MyFriends
 //
-//  Created by ann on 06.06.17.
+//  Created by ann on 09.06.17.
 //  Copyright (c) 2017 ann. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "ListUserViewController.h"
 #import "AppearanceManager.h"
 #import "CoreDataManager.h"
-
 #define SIZE 35
 
-@interface ViewController ()
+@interface ListUserViewController ()
 @end
 
-@implementation ViewController
+@implementation ListUserViewController
+
 @synthesize fetchedResultsController = _fetchedResultsController;
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];   
+    [super viewDidLoad];
     
-    self.title = @"My Friends";
+    self.title = @"My Friends import";
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-     [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.leftBarButtonItem];
+    [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.leftBarButtonItem];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    UIBarButtonItem *updateButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(updateObject)];
+    self.navigationItem.rightBarButtonItem = updateButton;
     [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.rightBarButtonItem];
     
-    [[AppearanceManager shared] customizeTopNavigationBarAppearance:self.navigationController.navigationBar];     
-    self.viewScreen = self.view.bounds.size;    
-    [self drawButton];
+    [[AppearanceManager shared] customizeTopNavigationBarAppearance:self.navigationController.navigationBar];
+    self.viewScreen = self.view.bounds.size;
     
     _fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController];
     _fetchedResultsController.delegate = self;
@@ -51,16 +50,7 @@
     self.navigationController.navigationBarHidden = NO;
 }
 
--(void)drawButton
-{
-    self.exitButton = [[UIButton alloc]initWithFrame:CGRectZero];
-    [self.exitButton setTitle:@"Exit" forState:UIControlStateNormal];
-    [self.view addSubview:self.exitButton];
-    [self.exitButton addTarget:self action:@selector(exitButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [[AppearanceManager shared] customizeButtonAppearance:self.exitButton CoordinatesX:0 Y:self.viewScreen.height - 90 Width:self.viewScreen.width Radius:5];    
-}
-
--(void)insertNewObject
+-(void)updateObject
 {
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
@@ -83,19 +73,6 @@
     }
 }
 
--(void)exitButtonClick:(id)sender
-{
-    NSString *nameAlert = @"Exit";
-    self.alertExit = [[UIAlertView alloc] initWithTitle:nameAlert message:0 delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Cancel", nil];
-    [self.alertExit show];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(alertView == self.alertExit)
-        if (buttonIndex == 0)
-            exit(0);
-}
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -119,12 +96,12 @@
         [context deleteObject:info];
         
         [[CoreDataManager sharedInstance] saveContext];
-    }    
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{    
-     static NSString *CellIdentifier = @"Cell";
+{
+    static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
@@ -137,16 +114,16 @@
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    FriendDescription *info = [_fetchedResultsController objectAtIndexPath:indexPath]; 
-   // UIImage *smallImage = [info thumbnail];
+    FriendDescription *info = [_fetchedResultsController objectAtIndexPath:indexPath];
+    // UIImage *smallImage = [info thumbnail];
     UIImage * image = [UIImage imageNamed:@"Yuliya.jpg"];
     cell.imageView.image = image;
     cell.textLabel.text = @"Yuliya";
-//    //label.text = info.titleFriend;
+    //    //label.text = info.titleFriend;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{     
+{
     UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc] initWithIndexOfObject:indexPath];
     [self.navigationController pushViewController:userInformationViewController animated:YES];
 }
