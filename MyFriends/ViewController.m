@@ -18,6 +18,7 @@
 @implementation ViewController
 @synthesize fetchedResultsController = _fetchedResultsController;
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];   
@@ -25,9 +26,9 @@
     self.title = @"My Friends";
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
      [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.leftBarButtonItem];
-    
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    UIImage *faceImage = [UIImage imageNamed:@"updateButton"];
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithImage:faceImage style:UIBarButtonItemStylePlain target:self action:@selector(editObject)];
+    self.navigationItem.rightBarButtonItem = editButton;
     [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.rightBarButtonItem];
     
     [[AppearanceManager shared] customizeTopNavigationBarAppearance:self.navigationController.navigationBar];     
@@ -57,12 +58,12 @@
     [self.exitButton setTitle:@"Exit" forState:UIControlStateNormal];
     [self.view addSubview:self.exitButton];
     [self.exitButton addTarget:self action:@selector(exitButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [[AppearanceManager shared] customizeButtonAppearance:self.exitButton CoordinatesX:0 Y:self.viewScreen.height - 90 Width:self.viewScreen.width Radius:5];    
+    [[AppearanceManager shared] customizeButtonAppearance:self.exitButton CoordinatesX:0 Y:self.view.frame.size.height-90 Width:self.viewScreen.width Radius:5];
 }
 
--(void)insertNewObject
+-(void)editObject
 {
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    /*NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
     NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
     
@@ -71,7 +72,10 @@
     //UIImage *image = [UIImage imageNamed:@"photo.jpg"];
     //[newManagedObject setValue:UIImageJPEGRepresentation(image, SIZE) forKey:@"image"];
     
-    [self saveContext];
+    [self saveContext];*/    
+    
+    ListUserViewController *listUserViewController = [[ListUserViewController alloc] init];
+    [self.navigationController pushViewController:listUserViewController animated:YES];
 }
 - (void)saveContext {
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
@@ -131,7 +135,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellSeparatorStyleSingleLine;
     }
-    [self configureCell:cell atIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];    
     return cell;
 }
 
@@ -180,6 +184,7 @@
             [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
+     
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id )sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type

@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewController.h"
 #import "FriendDescription.h"
+#import "CoreDataManager.h"
 
 @interface UserInformationViewController : UIViewController
 
 -(id)initWithIndexOfObject:(NSIndexPath *)indexPath;
+
 @end

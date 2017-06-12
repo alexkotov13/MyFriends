@@ -58,8 +58,7 @@
     
     [newManagedObject setValue:@"First Name" forKey:@"firstName"];
     [newManagedObject setValue:@"Last Name" forKey:@"lastName"];
-    UIImage *image = [UIImage imageNamed:@"photo.jpg"];
-    [newManagedObject setValue:UIImageJPEGRepresentation(image, SIZE) forKey:@"image"];
+  
     
     [self saveContext];
 }
@@ -124,7 +123,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc] initWithIndexOfObject:indexPath];
+    UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc] init];
     [self.navigationController pushViewController:userInformationViewController animated:YES];
 }
 

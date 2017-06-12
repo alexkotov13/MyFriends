@@ -27,10 +27,11 @@
 		958B71FC1EE6D94300D3AC24 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 958B71FA1EE6D94300D3AC24 /* MainStoryboard_iPhone.storyboard */; };
 		958B71FF1EE6D94300D3AC24 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 958B71FD1EE6D94300D3AC24 /* MainStoryboard_iPad.storyboard */; };
 		958B72021EE6D94300D3AC24 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958B72011EE6D94300D3AC24 /* ViewController.m */; };
-		95918EC51EEA8ED9001CF834 /* Alex.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95918EC71EEA8ED9001CF834 /* Alex.jpg */; };
-		95918EC81EEA8EEF001CF834 /* Yuliya.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95918ECA1EEA8EEF001CF834 /* Yuliya.jpg */; };
 		95918ECC1EEA9566001CF834 /* File.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95918ECB1EEA9566001CF834 /* File.strings */; };
 		95918ECF1EEAA101001CF834 /* ListUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95918ECE1EEAA100001CF834 /* ListUserViewController.m */; };
+		95918ED11EEABDD8001CF834 /* updateButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 95918ED01EEABDD8001CF834 /* updateButton.png */; };
+		95918EDA1EEAD165001CF834 /* Alex.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95918ED81EEAD164001CF834 /* Alex.jpg */; };
+		95918EDB1EEAD165001CF834 /* Yuliya.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95918ED91EEAD164001CF834 /* Yuliya.jpg */; };
 		95DBEDF51EE9AC2E00F26B4C /* Anna.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95DBEDF11EE9AC2E00F26B4C /* Anna.jpg */; };
 		95DBEDF61EE9AC2E00F26B4C /* Jury.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95DBEDF21EE9AC2E00F26B4C /* Jury.jpg */; };
 /* End PBXBuildFile section */
@@ -65,11 +66,12 @@
 		958B71FE1EE6D94300D3AC24 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		958B72001EE6D94300D3AC24 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		958B72011EE6D94300D3AC24 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		95918EC61EEA8ED9001CF834 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Alex.jpg; sourceTree = "<group>"; };
-		95918EC91EEA8EEF001CF834 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = en; path = en.lproj/Yuliya.jpg; sourceTree = "<group>"; };
 		95918ECB1EEA9566001CF834 /* File.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = File.strings; sourceTree = "<group>"; };
 		95918ECD1EEAA100001CF834 /* ListUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListUserViewController.h; sourceTree = "<group>"; };
 		95918ECE1EEAA100001CF834 /* ListUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListUserViewController.m; sourceTree = "<group>"; };
+		95918ED01EEABDD8001CF834 /* updateButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = updateButton.png; path = Images/updateButton.png; sourceTree = "<group>"; };
+		95918ED81EEAD164001CF834 /* Alex.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Alex.jpg; path = Images/Alex.jpg; sourceTree = "<group>"; };
+		95918ED91EEAD164001CF834 /* Yuliya.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Yuliya.jpg; path = Images/Yuliya.jpg; sourceTree = "<group>"; };
 		95DBEDF11EE9AC2E00F26B4C /* Anna.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Anna.jpg; path = Images/Anna.jpg; sourceTree = "<group>"; };
 		95DBEDF21EE9AC2E00F26B4C /* Jury.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Jury.jpg; path = Images/Jury.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,10 +150,11 @@
 			isa = PBXGroup;
 			children = (
 				9589FED01EE920A400CE3004 /* FriendsModel.xcdatamodeld */,
-				95918EC71EEA8ED9001CF834 /* Alex.jpg */,
 				95DBEDF11EE9AC2E00F26B4C /* Anna.jpg */,
 				95DBEDF21EE9AC2E00F26B4C /* Jury.jpg */,
-				95918ECA1EEA8EEF001CF834 /* Yuliya.jpg */,
+				95918ED81EEAD164001CF834 /* Alex.jpg */,
+				95918ED91EEAD164001CF834 /* Yuliya.jpg */,
+				95918ED01EEABDD8001CF834 /* updateButton.png */,
 				9589FECE1EE91FBC00CE3004 /* ViewControllers */,
 				9589FECF1EE91FDF00CE3004 /* CoreData */,
 				958B71FD1EE6D94300D3AC24 /* MainStoryboard_iPad.storyboard */,
@@ -246,11 +249,12 @@
 				958B71FC1EE6D94300D3AC24 /* MainStoryboard_iPhone.storyboard in Resources */,
 				958B71FF1EE6D94300D3AC24 /* MainStoryboard_iPad.storyboard in Resources */,
 				9589FF111EE927E900CE3004 /* photo.jpg in Resources */,
-				95918EC51EEA8ED9001CF834 /* Alex.jpg in Resources */,
 				95DBEDF51EE9AC2E00F26B4C /* Anna.jpg in Resources */,
 				95DBEDF61EE9AC2E00F26B4C /* Jury.jpg in Resources */,
-				95918EC81EEA8EEF001CF834 /* Yuliya.jpg in Resources */,
 				95918ECC1EEA9566001CF834 /* File.strings in Resources */,
+				95918ED11EEABDD8001CF834 /* updateButton.png in Resources */,
+				95918EDA1EEAD165001CF834 /* Alex.jpg in Resources */,
+				95918EDB1EEAD165001CF834 /* Yuliya.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,25 +303,6 @@
 			);
 			name = MainStoryboard_iPad.storyboard;
 			sourceTree = "<group>";
-		};
-		95918EC71EEA8ED9001CF834 /* Alex.jpg */ = {
-			isa = PBXVariantGroup;
-			children = (
-				95918EC61EEA8ED9001CF834 /* en */,
-			);
-			name = Alex.jpg;
-			path = Images;
-			sourceTree = "<group>";
-		};
-		95918ECA1EEA8EEF001CF834 /* Yuliya.jpg */ = {
-			isa = PBXVariantGroup;
-			children = (
-				95918EC91EEA8EEF001CF834 /* en */,
-			);
-			name = Yuliya.jpg;
-			path = Images;
-			sourceTree = "<group>";
-			usesTabs = 0;
 		};
 /* End PBXVariantGroup section */
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UserInformationViewController.h"
-
+#import "ListUserViewController.h"
 #import "FriendDescription.h"
 
 @interface ViewController : UITableViewController <NSFetchedResultsControllerDelegate>
