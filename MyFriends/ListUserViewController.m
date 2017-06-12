@@ -42,6 +42,7 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);  // Fail
 	}
+    
 }
 - (void)viewWillAppear:(BOOL)animated
 {

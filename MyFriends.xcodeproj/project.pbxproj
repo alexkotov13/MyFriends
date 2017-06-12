@@ -32,6 +32,7 @@
 		95918ED11EEABDD8001CF834 /* updateButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 95918ED01EEABDD8001CF834 /* updateButton.png */; };
 		95918EDA1EEAD165001CF834 /* Alex.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95918ED81EEAD164001CF834 /* Alex.jpg */; };
 		95918EDB1EEAD165001CF834 /* Yuliya.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95918ED91EEAD164001CF834 /* Yuliya.jpg */; };
+		95B0C4BE1EEEBEAF00E3DC58 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B0C4BD1EEEBEAF00E3DC58 /* CameraViewController.m */; };
 		95DBEDF51EE9AC2E00F26B4C /* Anna.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95DBEDF11EE9AC2E00F26B4C /* Anna.jpg */; };
 		95DBEDF61EE9AC2E00F26B4C /* Jury.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95DBEDF21EE9AC2E00F26B4C /* Jury.jpg */; };
 /* End PBXBuildFile section */
@@ -72,6 +73,8 @@
 		95918ED01EEABDD8001CF834 /* updateButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = updateButton.png; path = Images/updateButton.png; sourceTree = "<group>"; };
 		95918ED81EEAD164001CF834 /* Alex.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Alex.jpg; path = Images/Alex.jpg; sourceTree = "<group>"; };
 		95918ED91EEAD164001CF834 /* Yuliya.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Yuliya.jpg; path = Images/Yuliya.jpg; sourceTree = "<group>"; };
+		95B0C4BC1EEEBEAF00E3DC58 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		95B0C4BD1EEEBEAF00E3DC58 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		95DBEDF11EE9AC2E00F26B4C /* Anna.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Anna.jpg; path = Images/Anna.jpg; sourceTree = "<group>"; };
 		95DBEDF21EE9AC2E00F26B4C /* Jury.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Jury.jpg; path = Images/Jury.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,6 +105,8 @@
 				9589FF101EE927E900CE3004 /* photo.jpg */,
 				9589FED31EE9214F00CE3004 /* UserInformationViewController.h */,
 				9589FED41EE9214F00CE3004 /* UserInformationViewController.m */,
+				95B0C4BC1EEEBEAF00E3DC58 /* CameraViewController.h */,
+				95B0C4BD1EEEBEAF00E3DC58 /* CameraViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 				9589FF141EE942E900CE3004 /* CoreDataManager.m in Sources */,
 				9589FF171EE9516900CE3004 /* FriendDescription.m in Sources */,
 				95918ECF1EEAA101001CF834 /* ListUserViewController.m in Sources */,
+				95B0C4BE1EEEBEAF00E3DC58 /* CameraViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -3,10 +3,13 @@
     <entity name="Friends" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="idFriend" optional="YES" attributeType="Integer 64" syncable="YES"/>
         <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isFriend" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Friends" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="Friends" positionX="160" positionY="192" width="128" height="150"/>
     </elements>
 </model>

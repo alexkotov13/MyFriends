@@ -9,6 +9,7 @@
 #import "UserInformationViewController.h"
 #import "AppearanceManager.h"
 #import "CoreDataManager.h"
+#import "CameraViewController.h"
 
 #define CENTRE_OBJECT 1
 #define COUNT_OBJECTS 3
@@ -25,14 +26,15 @@
     CGFloat _width, _height;
     UIToolbar* _toolBar;
     NSInteger _currIndex;
-    UIScrollView * _scrollView;
     UITextView * _firstNameTextView;
     UITextView * _lastNameTextView;
     UITextView * _phoneTextView;
     UITextView * _emailTextView;
+    UIButton * _changeImage;
 }
 
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property UIScrollView * scrollView;;
 @end
 
 @implementation UserInformationViewController
@@ -60,7 +62,6 @@
     //[self addItemsToScrollView];        
     
     [self setFetchedController];
-
     
     self.title = @"Friends Information";
     
@@ -85,33 +86,56 @@
 	}*/
 
   
-    _firstNameTextView = [self _drawTextViewWithText:@"First Name input" yTextView:_height + _width - _width * 0.8];
-    _lastNameTextView = [self _drawTextViewWithText:@"Last Name input" yTextView:_height +_width - _width * 0.6];
-    _emailTextView = [self _drawTextViewWithText:@"Email input" yTextView:_height + _width - _width * 0.4];
-    _phoneTextView = [self _drawTextViewWithText:@"Phone input" yTextView:_height + _width - _width * 0.2];
+    _firstNameTextView = [self _drawTextViewWithText:@"First Name input" yTextView:_height + _width - _width * 0.6];
+    _lastNameTextView = [self _drawTextViewWithText:@"Last Name input" yTextView:_height +_width - _width * 0.4];
+    _emailTextView = [self _drawTextViewWithText:@"Email input" yTextView:_height + _width - _width * 0.2];
+    _phoneTextView = [self _drawTextViewWithText:@"Phone input" yTextView:_height + _width];
+    
+    _changeImage = [[UIButton alloc]initWithFrame:CGRectZero];
+    [_changeImage setTitle:@"Change image" forState:UIControlStateNormal];    
+    [_changeImage addTarget:self action:@selector(_changeImageClick:) forControlEvents:UIControlEventTouchUpInside];
+    [[AppearanceManager shared] customizeButtonAppearance:_changeImage CoordinatesX:20 Y:_height + _width - _width * 0.85 Width:_width - 40 Radius:10];
+    [_scrollView addSubview:_changeImage];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(myNotificationMethod:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
 
+}
+- (void)myNotificationMethod:(NSNotification*)notification
+{
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size; 
+    CGPoint newSize = CGPointMake(0, keyboardSize.height + _scrollView.contentSize.height * 0.5);
+    _scrollView.contentOffset = newSize;
+}
+
+
+-(void)_changeImageClick:(id)sender
+{
+    CameraViewController *cameraViewController = [[CameraViewController alloc]init];
+    [self.navigationController pushViewController:cameraViewController animated:YES];
 }
 
 -(UITextView *)_drawTextViewWithText:(NSString*)placeholderText yTextView:(int)y
 {
-    UITextView * myTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, y, _width - 50, LABEL_AND_BUTTON_HEIGHT)];
+    UITextView * myTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, y, _width - 40, LABEL_AND_BUTTON_HEIGHT)];
     [myTextView setFont:[UIFont fontWithName:@"HelveticaNeue" size:14]];    
     myTextView.textColor = [UIColor lightGrayColor];
     myTextView.text = placeholderText;
     myTextView.delegate = self;
     [myTextView resignFirstResponder];
-    [self->_scrollView addSubview:myTextView];
+    [_scrollView addSubview:myTextView];
     return myTextView;
 }
 
 - (void) textViewDidBeginEditing:(UITextView *)textView
 {
     if (textView.textColor == [UIColor lightGrayColor]) {
-        //myTextView.editable = YES;
-        //myTextView.selectedRange = NSMakeRange(0, 0);
         textView.text = @"";
         textView.textColor = [UIColor blackColor];
-    }
+    }    
 }
 
 -(void) textViewDidChange:(UITextView *)textView
@@ -144,7 +168,7 @@
 	_scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = YES;
      NSInteger viewcount = 2;
-    _scrollView.contentSize = CGSizeMake(_width, _height * viewcount);         
+    _scrollView.contentSize = CGSizeMake(_width, _height * viewcount);
     [self.view addSubview:_scrollView];
     [self drawbackdroundImage];
 }
@@ -155,9 +179,8 @@
     UIImageView * backdroundView = [[UIImageView alloc] initWithImage:faceImage];
     backdroundView.contentMode = UIViewContentModeScaleAspectFill;
     backdroundView.frame = CGRectMake(0, 0, _width, _height);
-    [self->_scrollView addSubview:backdroundView];
+    [_scrollView addSubview:backdroundView];
 }
-
 
 -(void)setFetchedController
 {
