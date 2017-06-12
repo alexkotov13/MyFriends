@@ -1,0 +1,40 @@
+/* 
+  File.strings
+  MyFriends
+
+  Created by ann on 09.06.17.
+  Copyright (c) 2017 ann. All rights reserved.
+*/
+
+"ViewController_title" = "My Friends";
+"Exit_button_title" = "Exit";
+"Title_for_view_controller" = "My Friends";
+"Title_for_list_user_view_controller" = "My Friends import";
+"Title_for_user_information_view_controller" = "Friends information"; 
+"Title_for_back_step_button" = "Back";
+"Title_for_next_step_button" = "Next";
+"Saved_button_title" = "Saved!";
+"Cancel_button_title" = "Cancel";
+"Choose_camera_button" = "Camera";
+"Choose_library_button" = "Library";
+"OK_button_title" = "OK";
+"URL_title" = "https://randomuser.me/api/";
+"FirstNameTextView_text" = "First Name input";
+"LastNameTextView_text" = "Last Name input";
+"PhoneTextView_text" = "Phone input";
+"EmailTextView_text" = "Email input";
+"Change_image_button_title" = "Change image";
+"Text_font" = "HelveticaNeue";
+"TextView_is_empty" = "";
+"Alert_Library_title" = "Library Unavailable";
+"Message_alert_Library" = "Unable to find a Library on your device.";
+"Alert_Camera_title" = "Camera Unavailable";
+"Message_alert_Camera" = "Unable to find a Camera on your device.";
+
+
+
+
+
+
+
+

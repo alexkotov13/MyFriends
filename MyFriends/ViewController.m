@@ -23,7 +23,7 @@
 {
     [super viewDidLoad];   
     
-    self.title = @"My Friends";
+    self.title = NSLocalizedString(@"Title_for_view_controller", nil);
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
      [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.leftBarButtonItem];
     UIImage *faceImage = [UIImage imageNamed:@"updateButton"];
@@ -55,7 +55,7 @@
 -(void)drawButton
 {
     self.exitButton = [[UIButton alloc]initWithFrame:CGRectZero];
-    [self.exitButton setTitle:@"Exit" forState:UIControlStateNormal];
+    [self.exitButton setTitle:NSLocalizedString(@"Exit_button_title", nil) forState:UIControlStateNormal];
     [self.view addSubview:self.exitButton];
     [self.exitButton addTarget:self action:@selector(exitButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [[AppearanceManager shared] customizeButtonAppearance:self.exitButton CoordinatesX:0 Y:self.view.frame.size.height-90 Width:self.viewScreen.width Radius:5];
@@ -89,8 +89,8 @@
 
 -(void)exitButtonClick:(id)sender
 {
-    NSString *nameAlert = @"Exit";
-    self.alertExit = [[UIAlertView alloc] initWithTitle:nameAlert message:0 delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Cancel", nil];
+    NSString *nameAlert = NSLocalizedString(@"Exit_button_title", nill);
+    self.alertExit = [[UIAlertView alloc] initWithTitle:nameAlert message:0 delegate:self cancelButtonTitle: NSLocalizedString(@"OK_button_title", nill) otherButtonTitles:NSLocalizedString(@"Cancel_button_title", nill), nil];
     [self.alertExit show];
 }
 
@@ -128,7 +128,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {    
-     static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {

@@ -9,6 +9,7 @@
 #import "ListUserViewController.h"
 #import "AppearanceManager.h"
 #import "CoreDataManager.h"
+#import "AFNetworking.h"
 #define SIZE 35
 
 @interface ListUserViewController ()
@@ -22,7 +23,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"My Friends import";
+    self.title = NSLocalizedString(@"Title_for_list_user_view_controller", nill);
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.leftBarButtonItem];
     
@@ -42,6 +43,17 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);  // Fail
 	}
+    
+    NSURL *url = [[NSURL alloc] initWithString:NSLocalizedString(@"URL_title", nill)];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSLog(@"%@", JSON);
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
+    }];    
+    [operation start];
     
 }
 - (void)viewWillAppear:(BOOL)animated

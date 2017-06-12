@@ -63,7 +63,7 @@
     
     [self setFetchedController];
     
-    self.title = @"Friends Information";
+    self.title = NSLocalizedString(@"Title_for_user_information_view_controller", nill);
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(saveObject)];
     self.navigationItem.leftBarButtonItem = cancelButton;
@@ -86,13 +86,13 @@
 	}*/
 
   
-    _firstNameTextView = [self _drawTextViewWithText:@"First Name input" yTextView:_height + _width - _width * 0.6];
-    _lastNameTextView = [self _drawTextViewWithText:@"Last Name input" yTextView:_height +_width - _width * 0.4];
-    _emailTextView = [self _drawTextViewWithText:@"Email input" yTextView:_height + _width - _width * 0.2];
-    _phoneTextView = [self _drawTextViewWithText:@"Phone input" yTextView:_height + _width];
+    _firstNameTextView = [self _drawTextViewWithText: NSLocalizedString(@"FirstNameTextView_text", nil) yTextView:_height + _width - _width * 0.6];
+    _lastNameTextView = [self _drawTextViewWithText:NSLocalizedString(@"LastNameTextView_text", nil) yTextView:_height +_width - _width * 0.4];
+    _emailTextView = [self _drawTextViewWithText:NSLocalizedString(@"EmailTextView_text", nil) yTextView:_height + _width - _width * 0.2];
+    _phoneTextView = [self _drawTextViewWithText:NSLocalizedString(@"PhoneNameTextView_text", nil) yTextView:_height + _width];
     
     _changeImage = [[UIButton alloc]initWithFrame:CGRectZero];
-    [_changeImage setTitle:@"Change image" forState:UIControlStateNormal];    
+    [_changeImage setTitle:NSLocalizedString(@"Change_image_button_title", nil) forState:UIControlStateNormal];    
     [_changeImage addTarget:self action:@selector(_changeImageClick:) forControlEvents:UIControlEventTouchUpInside];
     [[AppearanceManager shared] customizeButtonAppearance:_changeImage CoordinatesX:20 Y:_height + _width - _width * 0.85 Width:_width - 40 Radius:10];
     [_scrollView addSubview:_changeImage];
@@ -121,7 +121,7 @@
 -(UITextView *)_drawTextViewWithText:(NSString*)placeholderText yTextView:(int)y
 {
     UITextView * myTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, y, _width - 40, LABEL_AND_BUTTON_HEIGHT)];
-    [myTextView setFont:[UIFont fontWithName:@"HelveticaNeue" size:14]];    
+    [myTextView setFont:[UIFont fontWithName:NSLocalizedString(@"Text_font", nil) size:14]];    
     myTextView.textColor = [UIColor lightGrayColor];
     myTextView.text = placeholderText;
     myTextView.delegate = self;
@@ -133,7 +133,7 @@
 - (void) textViewDidBeginEditing:(UITextView *)textView
 {
     if (textView.textColor == [UIColor lightGrayColor]) {
-        textView.text = @"";
+        textView.text = NSLocalizedString(@"TextView_is_empty", nil);
         textView.textColor = [UIColor blackColor];
     }    
 }
@@ -150,13 +150,13 @@
 - (void)_setText:(UITextView *)textView
 {
     if(textView == _firstNameTextView)
-        textView.text = @"First Name input";
+        textView.text = NSLocalizedString(@"FirstNameTextView_text", nil);
     else if(textView == _lastNameTextView)
-        textView.text = @"Last Name input";
+        textView.text = NSLocalizedString(@"LastNameTextView_text", nil);
     else if(textView == _emailTextView)
-        textView.text = @"Email input";
+        textView.text = NSLocalizedString(@"EmailTextView_text", nil);
     else if(textView == _phoneTextView)
-        textView.text = @"Phone input";
+        textView.text = NSLocalizedString(@"PhoneTextView_text", nil);
 }
 
 -(void)createScrollView

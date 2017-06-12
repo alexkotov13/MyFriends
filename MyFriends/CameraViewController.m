@@ -41,19 +41,19 @@ CGSize view;
 -(void)drawButton
 {
     library = [[UIButton alloc]initWithFrame:CGRectZero];
-    [library setTitle:@"Library" forState:UIControlStateNormal];
+    [library setTitle:NSLocalizedString(@"Choose_library_button", nil) forState:UIControlStateNormal];
     [self.view addSubview:library];
     [library addTarget:self action:@selector(libraryButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [[AppearanceManager shared] customizeButtonAppearance:library CoordinatesX:view.width / 4 - 60 Y:view.height / 4  Width:view.width - 40 Radius:10];
     
     camera = [[UIButton alloc]initWithFrame:CGRectZero];
-    [camera setTitle:@"Camera" forState:UIControlStateNormal];
+    [camera setTitle:NSLocalizedString(@"Choose_camera_button", nil) forState:UIControlStateNormal];
     [self.view addSubview:camera];
     [camera addTarget:self action:@selector(cameraButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [[AppearanceManager shared] customizeButtonAppearance:camera CoordinatesX:view.width / 4 - 60 Y:view.height / 2.2 Width:view.width - 40 Radius:10];
     
     cencel = [[UIButton alloc]initWithFrame:CGRectZero];
-    [cencel setTitle:@"Cencel" forState:UIControlStateNormal];
+    [cencel setTitle:NSLocalizedString(@"Cancel_button_title", nil) forState:UIControlStateNormal];
     [self.view addSubview:cencel];
     [cencel addTarget:self action:@selector(cencelClick:) forControlEvents:UIControlEventTouchUpInside];
     [[AppearanceManager shared] customizeButtonAppearance:cencel CoordinatesX:view.width / 4 - 60 Y:view.height / 1.5 Width:view.width - 40 Radius:10];
@@ -71,10 +71,9 @@ UIImagePickerController *imagePicker;
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Library Unavailable"
-                                                       message:@"Unable to find a Library on your device."
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Alert_Library_title", nil)                                                        message:NSLocalizedString(@"Message_alert_Library", nil)                              
                                                       delegate:nil
-                                             cancelButtonTitle:@"OK"
+                                             cancelButtonTitle:NSLocalizedString(@"OK_button_title", nil)
                                              otherButtonTitles:nil, nil];
         [alert show];
         alert = nil;
@@ -102,10 +101,9 @@ UIImagePickerController *imagePicker;
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Camera Unavailable"
-                                                       message:@"Unable to find a camera on your device."
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Alert_Camera_title", nil)                                                       message:NSLocalizedString(@"Message_alert_Camera", nil)
                                                       delegate:nil
-                                             cancelButtonTitle:@"OK"
+                                             cancelButtonTitle:NSLocalizedString(@"OK_button_title", nil)
                                              otherButtonTitles:nil, nil];
         [alert show];
         alert = nil;
