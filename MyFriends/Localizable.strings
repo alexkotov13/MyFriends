@@ -18,7 +18,7 @@
 "Choose_camera_button" = "Camera";
 "Choose_library_button" = "Library";
 "OK_button_title" = "OK";
-"URL_title" = "https://randomuser.me/api/";
+"URL_String" = "https://randomuser.me/api/";
 "FirstNameTextView_text" = "First Name input";
 "LastNameTextView_text" = "Last Name input";
 "PhoneTextView_text" = "Phone input";

@@ -102,7 +102,7 @@ static CoreDataManager *sharedManager = nil;
         return _fetchedResultsController;
     }
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Friends" inManagedObjectContext:_managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"FriendDescription" inManagedObjectContext:_managedObjectContext];
     [fetchRequest setEntity:entity];
     NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:NO];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];

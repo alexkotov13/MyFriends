@@ -34,10 +34,13 @@
 }
 
 @property (nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property UIScrollView * scrollView;;
+@property UIScrollView * scrollView;
+@property(nonatomic,retain) UIImageView* imageView;
+@property(nonatomic, retain) UIImage* image;
 @end
 
 @implementation UserInformationViewController
+
 //@synthesize fetchedResultsController = _fetchedResultsController;
 
 -(id)initWithIndexOfObject:(NSIndexPath *)indexPath
@@ -48,6 +51,11 @@
         _indexPath = [indexPath init];
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)viewDidLoad
@@ -75,7 +83,7 @@
     
     [[AppearanceManager shared] customizeTopNavigationBarAppearance:self.navigationController.navigationBar];
     
-    /*_fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController];
+    _fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController];
     _fetchedResultsController.delegate = self;
     [NSFetchedResultsController deleteCacheWithName:@"View"];
     NSError *error;
@@ -83,7 +91,7 @@
     {
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);  // Fail
-	}*/
+	}
 
   
     _firstNameTextView = [self _drawTextViewWithText: NSLocalizedString(@"FirstNameTextView_text", nil) yTextView:_height + _width - _width * 0.6];
@@ -175,11 +183,12 @@
 
 -(void)drawbackdroundImage
 {
-    UIImage *faceImage = [UIImage imageNamed:@"Anna.jpg"];
-    UIImageView * backdroundView = [[UIImageView alloc] initWithImage:faceImage];
-    backdroundView.contentMode = UIViewContentModeScaleAspectFill;
-    backdroundView.frame = CGRectMake(0, 0, _width, _height);
-    [_scrollView addSubview:backdroundView];
+    FriendDescription* friendDescription = [_fetchedResultsController objectAtIndexPath:_indexPath];
+    _imageView.image = [UIImage imageWithContentsOfFile:friendDescription.imagePath];
+    [_imageView setContentMode:UIViewContentModeScaleAspectFit];
+    _imageView.frame = CGRectMake(0, 0, _width, _height);
+    //_imageView.image = _image;
+    [_scrollView addSubview:_imageView];
 }
 
 -(void)setFetchedController

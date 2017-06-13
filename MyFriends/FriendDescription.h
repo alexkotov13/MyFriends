@@ -12,7 +12,10 @@
 @interface FriendDescription : NSObject
 
 @property (nonatomic, retain) NSString * imagePath;
-@property (nonatomic, retain) NSString * titleFriend;
+@property (nonatomic, retain) NSString * firstName;
+@property (nonatomic, retain) NSString * lastName;
+@property (nonatomic, retain) NSString * phone;
+@property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) id thumbnail;
 -(void)setImagePathWithImage:(UIImage *)image;
 

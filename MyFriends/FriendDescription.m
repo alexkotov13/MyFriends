@@ -16,7 +16,10 @@
 @implementation FriendDescription
 
 @dynamic imagePath;
-@dynamic titleFriend;
+@dynamic firstName;
+@dynamic lastName;
+@dynamic phone;
+@dynamic email;
 @dynamic thumbnail;
 
 - (NSString *)documentsDicrectory
@@ -49,9 +52,21 @@
     }
 }
 
--(NSString *)title
+-(NSString *)titleFirstName
 {
-    return self.titleFriend;
+    return self.firstName;
+}
+-(NSString *)titleLastName
+{
+    return self.lastName;
+}
+-(NSString *)titlePhone
+{
+    return self.phone;
+}
+-(NSString *)titleEmail
+{
+    return self.email;
 }
 
 @end

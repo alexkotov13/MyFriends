@@ -9,7 +9,7 @@
 #import "ListUserViewController.h"
 #import "AppearanceManager.h"
 #import "CoreDataManager.h"
-#import "AFNetworking.h"
+//#import "AFNetworking.h"
 #define SIZE 35
 
 @interface ListUserViewController ()
@@ -35,7 +35,7 @@
     self.viewScreen = self.view.bounds.size;
     
     _fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController];
-    _fetchedResultsController.delegate = self;
+    _fetchedResultsController.delegate = self;    
     [NSFetchedResultsController deleteCacheWithName:@"View"];
     NSError *error;
 	if (![[self fetchedResultsController] performFetch:&error])
@@ -43,17 +43,33 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);  // Fail
 	}
+
+//    NSURL *url = [[NSURL alloc] initWithString:NSLocalizedString(@"URL_String", nill)];
+//    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];    
+//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];   
+//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"%@", responseObject);
+//    } failure:nil];    
+//    [operation start];
     
-    NSURL *url = [[NSURL alloc] initWithString:NSLocalizedString(@"URL_title", nill)];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        NSLog(@"%@", JSON);
-        
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
-    }];    
-    [operation start];
+//    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:NSLocalizedString(@"URL_String", nill)]];
+//    NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"                                                            path:NSLocalizedString(@"URL_String", nill)
+//                                                      parameters:nil];
+//    
+//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+//    
+//    [httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
+//    
+//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        
+//        // Print the response body in text
+//        NSLog(@"Response: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//    }];
+//    [operation start];
     
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -128,15 +144,14 @@
 {
     FriendDescription *info = [_fetchedResultsController objectAtIndexPath:indexPath];
     // UIImage *smallImage = [info thumbnail];
-    UIImage * image = [UIImage imageNamed:@"Yuliya.jpg"];
+    UIImage * image = [UIImage imageNamed:@"photo.png"];
     cell.imageView.image = image;
-    cell.textLabel.text = @"Yuliya";
-    //    //label.text = info.titleFriend;
+    cell.textLabel.text = @"Name";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc] init];
+    ViewController *userInformationViewController = [[ViewController alloc] init];
     [self.navigationController pushViewController:userInformationViewController animated:YES];
 }
 

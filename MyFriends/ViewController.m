@@ -11,8 +11,13 @@
 #import "CoreDataManager.h"
 
 #define SIZE 35
+#define COORDINATE 5
+#define X_COORDINATE_FOR_LABEL 50
 
 @interface ViewController ()
+{
+CGFloat _width, _height;
+}
 @end
 
 @implementation ViewController
@@ -23,6 +28,9 @@
 {
     [super viewDidLoad];   
     
+    _width = self.view.frame.size.width;
+    _height = self.view.frame.size.height;
+    
     self.title = NSLocalizedString(@"Title_for_view_controller", nil);
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
      [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.leftBarButtonItem];
@@ -32,8 +40,7 @@
     [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.rightBarButtonItem];
     
     [[AppearanceManager shared] customizeTopNavigationBarAppearance:self.navigationController.navigationBar];     
-    self.viewScreen = self.view.bounds.size;    
-    [self drawButton];
+    self.viewScreen = self.view.bounds.size;   
     
     _fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController];
     _fetchedResultsController.delegate = self;
@@ -50,15 +57,6 @@
     [super viewWillAppear:animated];
     self.navigationController.toolbarHidden = YES;
     self.navigationController.navigationBarHidden = NO;
-}
-
--(void)drawButton
-{
-    self.exitButton = [[UIButton alloc]initWithFrame:CGRectZero];
-    [self.exitButton setTitle:NSLocalizedString(@"Exit_button_title", nil) forState:UIControlStateNormal];
-    [self.view addSubview:self.exitButton];
-    [self.exitButton addTarget:self action:@selector(exitButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [[AppearanceManager shared] customizeButtonAppearance:self.exitButton CoordinatesX:0 Y:self.view.frame.size.height-90 Width:self.viewScreen.width Radius:5];
 }
 
 -(void)editObject
@@ -142,11 +140,12 @@
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     FriendDescription *info = [_fetchedResultsController objectAtIndexPath:indexPath]; 
-   // UIImage *smallImage = [info thumbnail];
-    UIImage * image = [UIImage imageNamed:@"Yuliya.jpg"];
-    cell.imageView.image = image;
-    cell.textLabel.text = @"Yuliya";
-//    //label.text = info.titleFriend;
+    
+    UIImage *smallImage = [info thumbnail];
+    cell.imageView.image = smallImage;
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(X_COORDINATE_FOR_LABEL, COORDINATE, self.view.frame.size.width - SIZE * 2, SIZE)];
+    label.text = info.firstName;
+    [cell addSubview:label];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

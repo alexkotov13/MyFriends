@@ -7,6 +7,7 @@
 //
 
 #import "CameraViewController.h"
+#import "UserInformationViewController.h"
 
 
 CGSize view;
@@ -112,7 +113,8 @@ UIImagePickerController *imagePicker;
 
 -(void)cencelClick:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc] init];
+    [self.navigationController pushViewController:userInformationViewController animated:YES];
 }
 
 @end
