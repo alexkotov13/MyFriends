@@ -17,6 +17,8 @@
 @interface ViewController ()
 {
 CGFloat _width, _height;
+    UIImage *smallImage;
+    FriendDescription *info;
 }
 @end
 
@@ -75,15 +77,6 @@ CGFloat _width, _height;
     ListUserViewController *listUserViewController = [[ListUserViewController alloc] init];
     [self.navigationController pushViewController:listUserViewController animated:YES];
 }
-- (void)saveContext {
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    
-    NSError *error = nil;
-    if (![context save:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-}
 
 -(void)exitButtonClick:(id)sender
 {
@@ -117,7 +110,7 @@ CGFloat _width, _height;
     {
         // Delete the managed object for the given index path
         NSManagedObjectContext *context = [[CoreDataManager sharedInstance] managedObjectContext];
-        FriendDescription *info = [_fetchedResultsController objectAtIndexPath:indexPath];
+        info = [_fetchedResultsController objectAtIndexPath:indexPath];
         [context deleteObject:info];
         
         [[CoreDataManager sharedInstance] saveContext];
@@ -139,18 +132,17 @@ CGFloat _width, _height;
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    FriendDescription *info = [_fetchedResultsController objectAtIndexPath:indexPath]; 
+    info = [_fetchedResultsController objectAtIndexPath:indexPath];
     
-    UIImage *smallImage = [info thumbnail];
-    cell.imageView.image = smallImage;
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(X_COORDINATE_FOR_LABEL, COORDINATE, self.view.frame.size.width - SIZE * 2, SIZE)];
-    label.text = info.firstName;
-    [cell addSubview:label];
+    //smallImage = [info thumbnail];
+    cell.imageView.image = [info thumbnail];    
+    cell.textLabel.text = info.firstName;
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {     
-    UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc] initWithIndexOfObject:indexPath];
+    UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc] initWithImage:smallImage initWithFriendDescription:info initWithIndexOfObject:indexPath];
     [self.navigationController pushViewController:userInformationViewController animated:YES];
 }
 

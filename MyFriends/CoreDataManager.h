@@ -14,7 +14,7 @@
 
 @property (nonatomic, readwrite) NSFetchedResultsController *fetchedResultsController;
 @property NSManagedObjectContext *managedObjectContext;
-//@property NSManagedObjectContext *subContext;
+@property NSManagedObjectContext *subContext;
 
 + (CoreDataManager *)sharedInstance;
 - (NSFetchedResultsController *)fetchedResultsController;

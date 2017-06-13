@@ -17,13 +17,22 @@ CGSize view;
     UIButton *library;
     UIButton *camera;
     UIButton *cencel;
+    FriendDescription* _friendDescription;
 }
+@property(nonatomic, retain) FriendDescription* friendDescription;
 @end
 
 @implementation CameraViewController
 
-
-
+-(id)initWithPointDescription:(FriendDescription*) friendDescription
+{
+    self = [super init];
+    if(self)
+    {
+        _friendDescription = friendDescription ;
+    }
+    return self;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -84,10 +93,13 @@ UIImagePickerController *imagePicker;
 - (void) imagePickerController:(UIImagePickerController *)picker
  didFinishPickingMediaWithInfo:(NSDictionary *)info
 {    
-    //    imagePicker = [[UIImagePickerController alloc]init];
-    //    [self.navigationController pushViewController:imagePicker animated:YES];
-    UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc]init];
-    [self.navigationController pushViewController:userInformationViewController animated:YES];    
+    UIImage *pickedImage = [info objectForKey: UIImagePickerControllerEditedImage];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [_friendDescription setImagePathWithImage:pickedImage];
+    
+    UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc] initWithImage:pickedImage initWithFriendDescription:_friendDescription initWithIndexOfObject:nil];
+    [self.navigationController pushViewController:userInformationViewController animated:YES];     
 }
 
 - (void)cameraButtonClick:(id)sender
@@ -109,6 +121,14 @@ UIImagePickerController *imagePicker;
         [alert show];
         alert = nil;
     }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSError* error = nil;
+    NSManagedObjectContext *managedObjectContext = [[CoreDataManager sharedInstance] subContext];
+    [managedObjectContext save:&error];
+    [[CoreDataManager sharedInstance] saveContext];
 }
 
 -(void)cencelClick:(id)sender

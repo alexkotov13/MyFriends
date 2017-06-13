@@ -86,7 +86,8 @@
     NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
     
     [newManagedObject setValue:@"First Name" forKey:@"firstName"];
-    [newManagedObject setValue:@"Last Name" forKey:@"lastName"];
+    UIImage *image = [UIImage imageNamed:@"photo.png"];
+    [newManagedObject setValue:UIImageJPEGRepresentation(image, SIZE) forKey:@"image"];
   
     
     [self saveContext];

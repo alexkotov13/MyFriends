@@ -31,6 +31,9 @@
     UITextView * _phoneTextView;
     UITextView * _emailTextView;
     UIButton * _changeImage;
+    UIImage *pickedImage;
+    FriendDescription* _friendDescription;
+
 }
 
 @property (nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -43,12 +46,14 @@
 
 //@synthesize fetchedResultsController = _fetchedResultsController;
 
--(id)initWithIndexOfObject:(NSIndexPath *)indexPath
+- (id)initWithImage:(UIImage *)image initWithFriendDescription:(FriendDescription*) friendDescription initWithIndexOfObject:(NSIndexPath *)indexPath
 {
     self = [super init];
-    if(self)
+    if (self)
     {
-        _indexPath = [indexPath init];
+        pickedImage = image;
+        _friendDescription = friendDescription ;
+        _indexPath = indexPath;
     }
     return self;
 }
@@ -77,7 +82,7 @@
     self.navigationItem.leftBarButtonItem = cancelButton;
     [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.leftBarButtonItem];
     
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(saveObject)];
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Saved_button_title", nill) style:UIBarButtonItemStyleBordered target:self action:@selector(saveObject)];
     self.navigationItem.rightBarButtonItem = saveButton;
     [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.rightBarButtonItem];
     
@@ -147,7 +152,7 @@
 }
 
 -(void) textViewDidChange:(UITextView *)textView
-{
+{   
     if(textView.text.length == 0){
         textView.textColor = [UIColor lightGrayColor];
         [self _setText:textView];
@@ -183,11 +188,11 @@
 
 -(void)drawbackdroundImage
 {
-    FriendDescription* friendDescription = [_fetchedResultsController objectAtIndexPath:_indexPath];
-    _imageView.image = [UIImage imageWithContentsOfFile:friendDescription.imagePath];
+//    FriendDescription* friendDescription = [_fetchedResultsController objectAtIndexPath:_indexPath];
+    //_imageView.image = [UIImage imageWithContentsOfFile:friendDescription.imagePath];
+    _imageView = [[UIImageView alloc] initWithImage:pickedImage];
     [_imageView setContentMode:UIViewContentModeScaleAspectFit];
     _imageView.frame = CGRectMake(0, 0, _width, _height);
-    //_imageView.image = _image;
     [_scrollView addSubview:_imageView];
 }
 
@@ -206,9 +211,23 @@
 
 -(void)saveObject
 {
+    _friendDescription.firstName = _firstNameTextView.text;
+    _friendDescription.lastName = _lastNameTextView.text;
+    _friendDescription.email = _emailTextView.text;
+    _friendDescription.phone = _phoneTextView.text;
+    NSError* error = nil;
+    NSManagedObjectContext *managedObjectContext = [[CoreDataManager sharedInstance] subContext];
+    [managedObjectContext save:&error];
+    [[CoreDataManager sharedInstance] saveContext];
+    
     ViewController *viewController = [[ViewController alloc] init];
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:viewController animated:YES];   
+  
 }
+
+
+
+
 
 
 

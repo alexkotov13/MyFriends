@@ -11,7 +11,6 @@
 #import "UserInformationViewController.h"
 
 @interface CameraViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
-
-
+-(id)initWithPointDescription:(FriendDescription*) friendDescription;
 
 @end

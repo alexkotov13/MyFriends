@@ -21,7 +21,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize fetchedResultsController = _fetchedResultsController;
-//@synthesize subContext = _subCon text;
+@synthesize subContext = _subContext;
 
 static CoreDataManager *sharedManager = nil;
 
@@ -49,16 +49,16 @@ static CoreDataManager *sharedManager = nil;
     if (self)
     {
         [self setupManagedObjectContext];
-//        [self setupNewManagedObjectContext];
+        [self setupNewManagedObjectContext];
     }
     return self;
 }
 
-//-(void)setupNewManagedObjectContext
-//{
-//    _subContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-//    _subContext.parentContext = self.managedObjectContext;
-//}
+-(void)setupNewManagedObjectContext
+{
+    _subContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    _subContext.parentContext = self.managedObjectContext;
+}
 
 - (void)setupManagedObjectContext
 { 
@@ -72,7 +72,7 @@ static CoreDataManager *sharedManager = nil;
     NSError* error = nil;
    if([self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:persistentURL options:nil error:&error])
    {
-       self.managedObjectContext = [[NSManagedObjectContext alloc] init];
+       self.managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
        self.managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
    }
     else
