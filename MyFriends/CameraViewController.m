@@ -7,29 +7,30 @@
 //
 
 #import "CameraViewController.h"
-#import "UserInformationViewController.h"
-
 
 CGSize view;
 
-@interface CameraViewController ()
+@interface CameraViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
     UIButton *library;
     UIButton *camera;
     UIButton *cencel;
+    NSIndexPath* _indexPath;
+    UIImage* _pickedImage;
     FriendDescription* _friendDescription;
+    
 }
-@property(nonatomic, retain) FriendDescription* friendDescription;
 @end
 
 @implementation CameraViewController
 
--(id)initWithPointDescription:(FriendDescription*) friendDescription
+-(id)initWithFriendDescription:(FriendDescription*) friendDescription initWithIndexOfObject:(NSIndexPath *)indexPath
 {
     self = [super init];
     if(self)
     {
-        _friendDescription = friendDescription ;
+        _friendDescription = friendDescription;
+        _indexPath = indexPath;
     }
     return self;
 }
@@ -38,7 +39,8 @@ CGSize view;
     [super viewDidLoad];
     [[AppearanceManager shared] customizeViewController:self.view];
     view = self.view.bounds.size;
-    [self drawButton];
+    [self drawButton];  
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -68,12 +70,12 @@ CGSize view;
     [cencel addTarget:self action:@selector(cencelClick:) forControlEvents:UIControlEventTouchUpInside];
     [[AppearanceManager shared] customizeButtonAppearance:cencel CoordinatesX:view.width / 4 - 60 Y:view.height / 1.5 Width:view.width - 40 Radius:10];
 }
-UIImagePickerController *imagePicker;
+
 - (void)libraryButtonClick:(id)sender
 {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
     {
-        imagePicker = [[UIImagePickerController alloc] init];
+        UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.delegate = self;
         imagePicker.allowsEditing = YES;
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -92,14 +94,30 @@ UIImagePickerController *imagePicker;
 
 - (void) imagePickerController:(UIImagePickerController *)picker
  didFinishPickingMediaWithInfo:(NSDictionary *)info
-{    
-    UIImage *pickedImage = [info objectForKey: UIImagePickerControllerEditedImage];
+{
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    [_friendDescription setImagePathWithImage:pickedImage];
-    
-    UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc] initWithImage:pickedImage initWithFriendDescription:_friendDescription initWithIndexOfObject:nil];
-    [self.navigationController pushViewController:userInformationViewController animated:YES];     
+    _pickedImage = [info objectForKey: UIImagePickerControllerEditedImage];
+   
+    [self imagePathWithImage:_pickedImage];    
+    _friendDescription.thumbnail = _pickedImage;
+    UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc] initWithImage:_pickedImage initWithFriendDescription:_friendDescription initWithIndexOfObject:_indexPath];
+    [self.navigationController pushViewController:userInformationViewController animated:YES];
+
+}
+- (NSString *)documentsDicrectory
+{
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+}
+
+- (void)imagePathWithImage:(UIImage *)image
+{
+    NSDate* now = [NSDate date];
+    NSString* caldate = [now description];
+    NSString* recorderFilePath = [NSString stringWithFormat:@"%@/%@.jpg", [self documentsDicrectory], caldate];
+    NSData* data = UIImageJPEGRepresentation(image, 1.0f);
+    [data writeToFile:recorderFilePath atomically:YES];
+   _friendDescription.imagePath = recorderFilePath;
 }
 
 - (void)cameraButtonClick:(id)sender

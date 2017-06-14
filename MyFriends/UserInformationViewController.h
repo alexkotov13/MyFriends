@@ -10,7 +10,7 @@
 #import "ViewController.h"
 #import "FriendDescription.h"
 #import "CoreDataManager.h"
- 
+
 @interface UserInformationViewController : UIViewController <NSFetchedResultsControllerDelegate>
 
 -(id)initWithIndexOfObject:(NSIndexPath *)indexPath;

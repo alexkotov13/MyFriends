@@ -7,8 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "AppearanceManager.h"
-#import "CoreDataManager.h"
+
 
 #define SIZE 35
 #define COORDINATE 5
@@ -16,9 +15,9 @@
 
 @interface ViewController ()
 {
-CGFloat _width, _height;
-    UIImage *smallImage;
-    FriendDescription *info;
+    CGFloat _width, _height;
+    UIImage *_smallImage;
+    FriendDescription *_info;
 }
 @end
 
@@ -78,19 +77,7 @@ CGFloat _width, _height;
     [self.navigationController pushViewController:listUserViewController animated:YES];
 }
 
--(void)exitButtonClick:(id)sender
-{
-    NSString *nameAlert = NSLocalizedString(@"Exit_button_title", nill);
-    self.alertExit = [[UIAlertView alloc] initWithTitle:nameAlert message:0 delegate:self cancelButtonTitle: NSLocalizedString(@"OK_button_title", nill) otherButtonTitles:NSLocalizedString(@"Cancel_button_title", nill), nil];
-    [self.alertExit show];
-}
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(alertView == self.alertExit)
-        if (buttonIndex == 0)
-            exit(0);
-}
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -110,9 +97,15 @@ CGFloat _width, _height;
     {
         // Delete the managed object for the given index path
         NSManagedObjectContext *context = [[CoreDataManager sharedInstance] managedObjectContext];
-        info = [_fetchedResultsController objectAtIndexPath:indexPath];
-        [context deleteObject:info];
+        _info = [_fetchedResultsController objectAtIndexPath:indexPath];
+        [context deleteObject:_info];
         
+//        if (_info.imagePath)
+//        {
+//            NSString* image = _info.imagePath;
+//            NSURL* fullURL = [NSURL fileURLWithPath: image];
+//            [[NSFileManager defaultManager] removeItemAtURL:fullURL error: nil];
+//        }        
         [[CoreDataManager sharedInstance] saveContext];
     }    
 }
@@ -132,17 +125,20 @@ CGFloat _width, _height;
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    info = [_fetchedResultsController objectAtIndexPath:indexPath];
+    _info = [_fetchedResultsController objectAtIndexPath:indexPath];
     
-    //smallImage = [info thumbnail];
-    cell.imageView.image = [info thumbnail];    
-    cell.textLabel.text = info.firstName;
-
+    
+    _smallImage = [_info thumbnail];
+   // _smallImage = [UIImage imageNamed:@"_info.imagePath"];
+    cell.imageView.image = _smallImage; //[_info thumbnail];
+    cell.textLabel.text = _info.firstName;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{     
-    UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc] initWithImage:smallImage initWithFriendDescription:info initWithIndexOfObject:indexPath];
+{
+    _info = [_fetchedResultsController objectAtIndexPath:indexPath];
+    _smallImage = [_info thumbnail];
+    UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc] initWithImage:_smallImage initWithFriendDescription:_info initWithIndexOfObject:indexPath];
     [self.navigationController pushViewController:userInformationViewController animated:YES];
 }
 

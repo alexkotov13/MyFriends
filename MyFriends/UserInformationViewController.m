@@ -7,8 +7,6 @@
 //
 
 #import "UserInformationViewController.h"
-#import "AppearanceManager.h"
-#import "CoreDataManager.h"
 #import "CameraViewController.h"
 
 #define CENTRE_OBJECT 1
@@ -31,7 +29,7 @@
     UITextView * _phoneTextView;
     UITextView * _emailTextView;
     UIButton * _changeImage;
-    UIImage *pickedImage;
+    UIImage *_pickedImage;
     FriendDescription* _friendDescription;
 
 }
@@ -51,8 +49,8 @@
     self = [super init];
     if (self)
     {
-        pickedImage = image;
-        _friendDescription = friendDescription ;
+        _pickedImage = image;
+        _friendDescription = friendDescription;
         _indexPath = indexPath;
     }
     return self;
@@ -99,10 +97,10 @@
 	}
 
   
-    _firstNameTextView = [self _drawTextViewWithText: NSLocalizedString(@"FirstNameTextView_text", nil) yTextView:_height + _width - _width * 0.6];
-    _lastNameTextView = [self _drawTextViewWithText:NSLocalizedString(@"LastNameTextView_text", nil) yTextView:_height +_width - _width * 0.4];
-    _emailTextView = [self _drawTextViewWithText:NSLocalizedString(@"EmailTextView_text", nil) yTextView:_height + _width - _width * 0.2];
-    _phoneTextView = [self _drawTextViewWithText:NSLocalizedString(@"PhoneNameTextView_text", nil) yTextView:_height + _width];
+    _firstNameTextView = [self _drawTextViewWithText:_friendDescription.firstName yTextView:_height + _width - _width * 0.6];
+    _lastNameTextView = [self _drawTextViewWithText:_friendDescription.lastName yTextView:_height +_width - _width * 0.4];
+    _emailTextView = [self _drawTextViewWithText:_friendDescription.email yTextView:_height + _width - _width * 0.2];
+    _phoneTextView = [self _drawTextViewWithText:_friendDescription.phone yTextView:_height + _width];
     
     _changeImage = [[UIButton alloc]initWithFrame:CGRectZero];
     [_changeImage setTitle:NSLocalizedString(@"Change_image_button_title", nil) forState:UIControlStateNormal];    
@@ -127,7 +125,7 @@
 
 -(void)_changeImageClick:(id)sender
 {
-    CameraViewController *cameraViewController = [[CameraViewController alloc]init];
+    CameraViewController *cameraViewController = [[CameraViewController alloc]initWithFriendDescription:_friendDescription initWithIndexOfObject:_indexPath];
     [self.navigationController pushViewController:cameraViewController animated:YES];
 }
 
@@ -135,10 +133,11 @@
 {
     UITextView * myTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, y, _width - 40, LABEL_AND_BUTTON_HEIGHT)];
     [myTextView setFont:[UIFont fontWithName:NSLocalizedString(@"Text_font", nil) size:14]];    
-    myTextView.textColor = [UIColor lightGrayColor];
+    myTextView.textColor = [UIColor blackColor];
     myTextView.text = placeholderText;
     myTextView.delegate = self;
     [myTextView resignFirstResponder];
+    [self textViewDidChange:myTextView];
     [_scrollView addSubview:myTextView];
     return myTextView;
 }
@@ -155,12 +154,12 @@
 {   
     if(textView.text.length == 0){
         textView.textColor = [UIColor lightGrayColor];
-        [self _setText:textView];
+        [self setText:textView];
         [textView resignFirstResponder];
     }
 }
 
-- (void)_setText:(UITextView *)textView
+- (void) setText:(UITextView *)textView
 {
     if(textView == _firstNameTextView)
         textView.text = NSLocalizedString(@"FirstNameTextView_text", nil);
@@ -188,9 +187,10 @@
 
 -(void)drawbackdroundImage
 {
-//    FriendDescription* friendDescription = [_fetchedResultsController objectAtIndexPath:_indexPath];
+    //FriendDescription* friendDescription = [_fetchedResultsController objectAtIndexPath:_indexPath];
     //_imageView.image = [UIImage imageWithContentsOfFile:friendDescription.imagePath];
-    _imageView = [[UIImageView alloc] initWithImage:pickedImage];
+    _imageView = [[UIImageView alloc] initWithImage:_pickedImage];
+    
     [_imageView setContentMode:UIViewContentModeScaleAspectFit];
     _imageView.frame = CGRectMake(0, 0, _width, _height);
     [_scrollView addSubview:_imageView];
@@ -211,10 +211,13 @@
 
 -(void)saveObject
 {
-    _friendDescription.firstName = _firstNameTextView.text;
-    _friendDescription.lastName = _lastNameTextView.text;
-    _friendDescription.email = _emailTextView.text;
-    _friendDescription.phone = _phoneTextView.text;
+    if(_firstNameTextView.textColor == [UIColor blackColor])
+    {        
+        _friendDescription.firstName = _firstNameTextView.text;
+        _friendDescription.lastName = _lastNameTextView.text;
+        _friendDescription.email = _emailTextView.text;
+        _friendDescription.phone = _phoneTextView.text;
+    }
     NSError* error = nil;
     NSManagedObjectContext *managedObjectContext = [[CoreDataManager sharedInstance] subContext];
     [managedObjectContext save:&error];

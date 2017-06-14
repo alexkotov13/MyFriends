@@ -10,6 +10,8 @@
 #import "UserInformationViewController.h"
 #import "ListUserViewController.h"
 #import "FriendDescription.h"
+#import "CoreDataManager.h"
+#import "AppearanceManager.h"
 
 @interface ViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 

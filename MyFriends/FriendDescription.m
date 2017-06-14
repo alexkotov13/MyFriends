@@ -27,29 +27,9 @@
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 }
 
--(void)setImagePathWithImage:(UIImage *)image
+- (NSString*)withImage
 {
-    NSDate* now = [NSDate date];
-    NSString* caldate = [now description];
-    NSString* recorderFilePath = [NSString stringWithFormat:@"%@/%@.png", [self documentsDicrectory], caldate];
-    NSData* data = UIImageJPEGRepresentation(image, 1.0f);
-    [data writeToFile:recorderFilePath atomically:YES];
-    self.imagePath = recorderFilePath;
-}
-
-- (void)prepareForDeletion
-{
-    [self deleteImageFromPath];
-}
-
--(void)deleteImageFromPath
-{
-    if (self.imagePath)
-    {
-        NSString* image = self.imagePath;
-        NSURL* fullURL = [NSURL fileURLWithPath: image];
-        [[NSFileManager defaultManager] removeItemAtURL:fullURL error: nil];
-    }
+    return self.imagePath;
 }
 
 -(NSString *)titleFirstName

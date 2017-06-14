@@ -83,23 +83,13 @@
 {
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-    NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-    
-    [newManagedObject setValue:@"First Name" forKey:@"firstName"];
+    NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];    
+    [newManagedObject setValue:@"Name" forKey:@"firstName"];
+    [newManagedObject setValue:@"photo.png" forKey:@"imagePath"];
     UIImage *image = [UIImage imageNamed:@"photo.png"];
-    [newManagedObject setValue:UIImageJPEGRepresentation(image, SIZE) forKey:@"image"];
-  
-    
-    [self saveContext];
-}
-- (void)saveContext {
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    
-    NSError *error = nil;
-    if (![context save:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
+    [newManagedObject setValue:image forKey:@"thumbnail"];
+   
+    [[CoreDataManager sharedInstance] saveContext];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -152,8 +142,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ViewController *userInformationViewController = [[ViewController alloc] init];
-    [self.navigationController pushViewController:userInformationViewController animated:YES];
+    ViewController *viewController = [[ViewController alloc] init];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 #pragma mark - NSFetchResultsControllerDelegate
