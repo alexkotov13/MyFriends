@@ -21,8 +21,8 @@
 "URL_String" = "https://randomuser.me/api/";
 "FirstNameTextView_text" = "First Name input";
 "LastNameTextView_text" = "Last Name input";
-"PhoneTextView_text" = "Phone input";
-"EmailTextView_text" = "Email input";
+"PhoneTextView_text" = "0993377333";
+"EmailTextView_text" = "dovira@dpsu.gov.ua";
 "Change_image_button_title" = "Change image";
 "Text_font" = "HelveticaNeue";
 "TextView_is_empty" = "";

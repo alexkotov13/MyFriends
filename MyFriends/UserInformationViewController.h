@@ -10,10 +10,12 @@
 #import "ViewController.h"
 #import "FriendDescription.h"
 #import "CoreDataManager.h"
+#import "VMaskTextField.h"
 
 @interface UserInformationViewController : UIViewController <NSFetchedResultsControllerDelegate>
 
 -(id)initWithIndexOfObject:(NSIndexPath *)indexPath;
 -(id)initWithImage:(UIImage *)image initWithFriendDescription:(FriendDescription*) friendDescription initWithIndexOfObject:(NSIndexPath *)indexPath;
+
 
 @end

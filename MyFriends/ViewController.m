@@ -131,7 +131,7 @@
     _smallImage = [_info thumbnail];
    // _smallImage = [UIImage imageNamed:@"_info.imagePath"];
     cell.imageView.image = _smallImage; //[_info thumbnail];
-    cell.textLabel.text = _info.firstName;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@%@%@",_info.firstName, @" ", _info.lastName];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

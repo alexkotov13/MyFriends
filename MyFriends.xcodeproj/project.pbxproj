@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9542D6731EF2909A009816F9 /* UserInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9542D6721EF2909A009816F9 /* UserInformationViewController.m */; };
 		958710FD1EE84D3C000E0C51 /* AppearanceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 958710FC1EE84D3C000E0C51 /* AppearanceManager.m */; };
 		958710FF1EE84D97000E0C51 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958710FE1EE84D97000E0C51 /* QuartzCore.framework */; };
 		958711011EE84D9F000E0C51 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958711001EE84D9F000E0C51 /* CoreData.framework */; };
 		958953621EF0067400A38D88 /* photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 958953611EF0067400A38D88 /* photo.png */; };
 		9589FED21EE920A400CE3004 /* FriendsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9589FED01EE920A400CE3004 /* FriendsModel.xcdatamodeld */; };
-		9589FED51EE9214F00CE3004 /* UserInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9589FED41EE9214F00CE3004 /* UserInformationViewController.m */; };
 		9589FF111EE927E900CE3004 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9589FF101EE927E900CE3004 /* photo.jpg */; };
 		9589FF141EE942E900CE3004 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9589FF131EE942E900CE3004 /* CoreDataManager.m */; };
 		9589FF171EE9516900CE3004 /* FriendDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 9589FF161EE9516900CE3004 /* FriendDescription.m */; };
@@ -41,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9542D66D1EF28C6F009816F9 /* error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error@2x.png"; sourceTree = "<group>"; };
+		9542D6721EF2909A009816F9 /* UserInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInformationViewController.m; sourceTree = "<group>"; };
 		958710FB1EE84D3C000E0C51 /* AppearanceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearanceManager.h; sourceTree = "<group>"; };
 		958710FC1EE84D3C000E0C51 /* AppearanceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearanceManager.m; sourceTree = "<group>"; };
 		958710FE1EE84D97000E0C51 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -48,7 +50,6 @@
 		958953611EF0067400A38D88 /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = photo.png; path = Images/photo.png; sourceTree = "<group>"; };
 		9589FED11EE920A400CE3004 /* FriendsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FriendsModel.xcdatamodel; sourceTree = "<group>"; };
 		9589FED31EE9214F00CE3004 /* UserInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInformationViewController.h; sourceTree = "<group>"; };
-		9589FED41EE9214F00CE3004 /* UserInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInformationViewController.m; sourceTree = "<group>"; };
 		9589FF101EE927E900CE3004 /* photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = photo.jpg; path = ../../../Downloads/photo.jpg; sourceTree = "<group>"; };
 		9589FF121EE942E900CE3004 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
 		9589FF131EE942E900CE3004 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
@@ -112,7 +113,7 @@
 				95918ECE1EEAA100001CF834 /* ListUserViewController.m */,
 				9589FF101EE927E900CE3004 /* photo.jpg */,
 				9589FED31EE9214F00CE3004 /* UserInformationViewController.h */,
-				9589FED41EE9214F00CE3004 /* UserInformationViewController.m */,
+				9542D6721EF2909A009816F9 /* UserInformationViewController.m */,
 				95B0C4BC1EEEBEAF00E3DC58 /* CameraViewController.h */,
 				95B0C4BD1EEEBEAF00E3DC58 /* CameraViewController.m */,
 			);
@@ -180,6 +181,7 @@
 				958710FC1EE84D3C000E0C51 /* AppearanceManager.m */,
 				9589FF151EE9516800CE3004 /* FriendDescription.h */,
 				9589FF161EE9516900CE3004 /* FriendDescription.m */,
+				9542D66D1EF28C6F009816F9 /* error@2x.png */,
 				958B71E91EE6D94300D3AC24 /* Supporting Files */,
 				95918ECB1EEA9566001CF834 /* Localizable.strings */,
 			);
@@ -288,11 +290,11 @@
 				958B72021EE6D94300D3AC24 /* ViewController.m in Sources */,
 				958710FD1EE84D3C000E0C51 /* AppearanceManager.m in Sources */,
 				9589FED21EE920A400CE3004 /* FriendsModel.xcdatamodeld in Sources */,
-				9589FED51EE9214F00CE3004 /* UserInformationViewController.m in Sources */,
 				9589FF141EE942E900CE3004 /* CoreDataManager.m in Sources */,
 				9589FF171EE9516900CE3004 /* FriendDescription.m in Sources */,
 				95918ECF1EEAA101001CF834 /* ListUserViewController.m in Sources */,
 				95B0C4BE1EEEBEAF00E3DC58 /* CameraViewController.m in Sources */,
+				9542D6731EF2909A009816F9 /* UserInformationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

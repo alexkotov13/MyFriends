@@ -60,12 +60,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyFriends/UserInformationViewController.m"
-         timestampString = "519142554.690513"
+         timestampString = "519231550.71788"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "155"
-         endingLineNumber = "155"
-         landmarkName = "-textViewDidChange:"
+         startingLineNumber = "314"
+         endingLineNumber = "314"
+         landmarkName = "-createScrollView"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -73,12 +73,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyFriends/UserInformationViewController.m"
-         timestampString = "519142554.690513"
+         timestampString = "519231550.71788"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "164"
-         endingLineNumber = "164"
-         landmarkName = "-_setText:"
+         startingLineNumber = "132"
+         endingLineNumber = "132"
+         landmarkName = "-_drawTextFieldWithText:placeholderWithTextField:yTextField:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -86,12 +86,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyFriends/UserInformationViewController.m"
-         timestampString = "519123485.96976"
+         timestampString = "519231550.71788"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "132"
+         endingLineNumber = "132"
+         landmarkName = "-_drawTextFieldWithText:placeholderWithTextField:yTextField:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyFriends/UserInformationViewController.m"
+         timestampString = "519231550.71788"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "134"
          endingLineNumber = "134"
-         landmarkName = "-_drawTextViewWithText:yTextView:"
+         landmarkName = "-_drawTextFieldWithText:placeholderWithTextField:yTextField:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -99,64 +112,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyFriends/UserInformationViewController.m"
-         timestampString = "519142554.690513"
+         timestampString = "519231550.71788"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "149"
-         endingLineNumber = "149"
-         landmarkName = "-textViewDidBeginEditing:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyFriends/UserInformationViewController.m"
-         timestampString = "519123485.96976"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "119"
-         endingLineNumber = "119"
-         landmarkName = "-myNotificationMethod:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyFriends/UserInformationViewController.m"
-         timestampString = "519123485.96976"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "119"
-         endingLineNumber = "119"
-         landmarkName = "-myNotificationMethod:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyFriends/UserInformationViewController.m"
-         timestampString = "519123485.96976"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "121"
-         endingLineNumber = "121"
-         landmarkName = "-myNotificationMethod:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyFriends/UserInformationViewController.m"
-         timestampString = "519123485.96976"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "122"
-         endingLineNumber = "122"
-         landmarkName = "-myNotificationMethod:"
+         startingLineNumber = "135"
+         endingLineNumber = "135"
+         landmarkName = "-_drawTextFieldWithText:placeholderWithTextField:yTextField:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -203,11 +164,37 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyFriends/UserInformationViewController.m"
-         timestampString = "519142554.690513"
+         timestampString = "519231550.71788"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "222"
-         endingLineNumber = "222"
+         startingLineNumber = "375"
+         endingLineNumber = "375"
+         landmarkName = "@implementation UserInformationViewController"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyFriends/UserInformationViewController.m"
+         timestampString = "519231550.71788"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "374"
+         endingLineNumber = "374"
+         landmarkName = "-cencelClick:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyFriends/UserInformationViewController.m"
+         timestampString = "519231550.71788"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "367"
+         endingLineNumber = "367"
          landmarkName = "-saveObject"
          landmarkType = "5">
       </FileBreakpoint>
@@ -216,50 +203,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyFriends/UserInformationViewController.m"
-         timestampString = "519142554.690513"
+         timestampString = "519231550.71788"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "219"
-         endingLineNumber = "219"
-         landmarkName = "-saveObject"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyFriends/UserInformationViewController.m"
-         timestampString = "519142554.690513"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "153"
-         endingLineNumber = "153"
-         landmarkName = "-textViewDidChange:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyFriends/UserInformationViewController.m"
-         timestampString = "519142554.690513"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "213"
-         endingLineNumber = "213"
-         landmarkName = "-saveObject"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyFriends/UserInformationViewController.m"
-         timestampString = "519123485.96976"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "52"
-         endingLineNumber = "52"
+         startingLineNumber = "58"
+         endingLineNumber = "58"
          landmarkName = "-initWithImage:initWithFriendDescription:initWithIndexOfObject:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -333,12 +281,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyFriends/UserInformationViewController.m"
-         timestampString = "519142554.690513"
+         timestampString = "519231550.71788"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "194"
-         endingLineNumber = "194"
-         landmarkName = "-drawbackdroundImage"
+         startingLineNumber = "343"
+         endingLineNumber = "343"
+         landmarkName = "-setFetchedController"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -471,7 +419,80 @@
          landmarkName = "-configureCell:atIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyFriends/UserInformationViewController.m"
+         timestampString = "519227505.943846"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "29"
+         endingLineNumber = "29"
+         landmarkName = "@interface UserInformationViewController()"
+         landmarkType = "2">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyFriends/UserInformationViewController.m"
+         timestampString = "519231550.71788"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "223"
+         endingLineNumber = "223"
+         landmarkName = "-textField:shouldChangeCharactersInRange:replacementString:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyFriends/UserInformationViewController.m"
+         timestampString = "519231550.71788"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "299"
+         endingLineNumber = "299"
+         landmarkName = "-textField:shouldChangeCharactersInRange:replacementString:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyFriends/UserInformationViewController.m"
+         timestampString = "519231550.71788"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "224"
+         endingLineNumber = "224"
+         landmarkName = "-textField:shouldChangeCharactersInRange:replacementString:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyFriends/UserInformationViewController.m"
+         timestampString = "519231550.71788"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "186"
+         endingLineNumber = "186"
+         landmarkName = "-textFieldDidEndEditing:"
+         landmarkType = "5">
+      </FileBreakpoint>
    </FileBreakpoints>
+   <SymbolicBreakpoints>
+      <AddressBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         symbolName = "*0x70bd26">
+      </AddressBreakpoint>
+   </SymbolicBreakpoints>
    <ExceptionBreakpoints>
       <ExceptionBreakpoint
          shouldBeEnabled = "No"
