@@ -39,8 +39,8 @@ CGSize view;
     [super viewDidLoad];
     [[AppearanceManager shared] customizeViewController:self.view];
     view = self.view.bounds.size;
-    [self drawButton];  
-
+    [self drawButton];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -83,7 +83,7 @@ CGSize view;
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Alert_Library_title", nil)                                                        message:NSLocalizedString(@"Message_alert_Library", nil)                              
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Alert_Library_title", nil)                                                        message:NSLocalizedString(@"Message_alert_Library", nil)
                                                       delegate:nil
                                              cancelButtonTitle:NSLocalizedString(@"OK_button_title", nil)
                                              otherButtonTitles:nil, nil];
@@ -98,12 +98,12 @@ CGSize view;
     [self dismissViewControllerAnimated:YES completion:nil];
     
     _pickedImage = [info objectForKey: UIImagePickerControllerEditedImage];
-   
-    [self imagePathWithImage:_pickedImage];    
+    
+    [self imagePathWithImage:_pickedImage];
     _friendDescription.thumbnail = _pickedImage;
     UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc] initWithImage:_pickedImage initWithFriendDescription:_friendDescription initWithIndexOfObject:_indexPath];
     [self.navigationController pushViewController:userInformationViewController animated:YES];
-
+    
 }
 - (NSString *)documentsDicrectory
 {
@@ -117,7 +117,7 @@ CGSize view;
     NSString* recorderFilePath = [NSString stringWithFormat:@"%@/%@.jpg", [self documentsDicrectory], caldate];
     NSData* data = UIImageJPEGRepresentation(image, 1.0f);
     [data writeToFile:recorderFilePath atomically:YES];
-   _friendDescription.imagePath = recorderFilePath;
+    _friendDescription.imagePath = recorderFilePath;
 }
 
 - (void)cameraButtonClick:(id)sender

@@ -13,11 +13,13 @@
 
 
 
-@property (nonatomic, retain) NSString * imagePath;
-@property (nonatomic, retain) NSString * firstName;
-@property (nonatomic, retain) NSString * lastName;
-@property (nonatomic, retain) NSString * phone;
-@property (nonatomic, retain) NSString * email;
-@property (nonatomic, retain) id thumbnail;
+@property (nonatomic) NSString * imagePath;
+@property (nonatomic) NSString * firstName;
+@property (nonatomic) NSString * lastName;
+@property (nonatomic) NSString * phone;
+@property (nonatomic) NSString * email;
+@property (nonatomic) BOOL isFriend;
+@property (nonatomic) NSString * idFriend;
+@property (nonatomic) id thumbnail;
 
 @end

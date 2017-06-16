@@ -21,11 +21,8 @@
 @dynamic phone;
 @dynamic email;
 @dynamic thumbnail;
-
-- (NSString *)documentsDicrectory
-{
-    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-}
+@dynamic isFriend;
+@dynamic idFriend;
 
 - (NSString*)withImage
 {

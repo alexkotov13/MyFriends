@@ -31,8 +31,8 @@ static CoreDataManager *sharedManager = nil;
     {
         if (!sharedManager)
         {
-           //sharedManager= [NSAllocateObject([self class], 0, NULL) init];
-           sharedManager = [[CoreDataManager alloc] init];
+            //sharedManager= [NSAllocateObject([self class], 0, NULL) init];
+            sharedManager = [[CoreDataManager alloc] init];
         }
     }
     return sharedManager;
@@ -61,7 +61,7 @@ static CoreDataManager *sharedManager = nil;
 }
 
 - (void)setupManagedObjectContext
-{ 
+{
     
     NSFileManager* fileManager = [NSFileManager defaultManager];
     NSURL* documentDirectoryURL = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0];
@@ -70,11 +70,11 @@ static CoreDataManager *sharedManager = nil;
     self.managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     self.persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
     NSError* error = nil;
-   if([self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:persistentURL options:nil error:&error])
-   {
-       self.managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-       self.managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
-   }
+    if([self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:persistentURL options:nil error:&error])
+    {
+        self.managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        self.managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
+    }
     else
     {
         NSLog(@"ERROR: %@", error.description);
@@ -111,7 +111,7 @@ static CoreDataManager *sharedManager = nil;
     [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                         managedObjectContext:_managedObjectContext sectionNameKeyPath:nil
                                                    cacheName:@"View"];
-    self.fetchedResultsController = theFetchedResultsController;   
+    self.fetchedResultsController = theFetchedResultsController;
     return _fetchedResultsController;
 }
 

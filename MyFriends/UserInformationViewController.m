@@ -33,7 +33,7 @@
     UIImage *_pickedImage;
     FriendDescription* _friendDescription;
     BOOL flagValidate;
-
+    
 }
 
 @property (nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -72,7 +72,7 @@
     _height = self.view.frame.size.height;
     
     [[AppearanceManager shared] customizeViewController:self.view];
-    [self createScrollView];     
+    [self createScrollView];
     
     [self setFetchedController];
     
@@ -97,23 +97,23 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);  // Fail
 	}
-  
+    
     _firstNameTextField = [self _drawTextFieldWithText:_friendDescription.firstName placeholderWithTextField:NSLocalizedString(@"FirstNameTextView_text", nil) yTextField:_height + _width - _width * 0.6];
     _lastNameTextField = [self _drawTextFieldWithText:_friendDescription.lastName placeholderWithTextField:NSLocalizedString(@"LastNameTextView_text", nil) yTextField:_height +_width - _width * 0.4];
-   _emailTextField = [self _drawTextFieldWithText:_friendDescription.email placeholderWithTextField:NSLocalizedString(@"EmailTextView_text", nil) yTextField:_height + _width - _width * 0.2];
-    _phoneTextField = [self _drawTextFieldWithText:_friendDescription.phone placeholderWithTextField:NSLocalizedString(@"PhoneTextView_text", nil) yTextField:_height + _width];  
-        
+    _emailTextField = [self _drawTextFieldWithText:_friendDescription.email placeholderWithTextField:NSLocalizedString(@"EmailTextView_text", nil) yTextField:_height + _width - _width * 0.2];
+    _phoneTextField = [self _drawTextFieldWithText:_friendDescription.phone placeholderWithTextField:NSLocalizedString(@"PhoneTextView_text", nil) yTextField:_height + _width];
+    
     _changeImage = [[UIButton alloc]initWithFrame:CGRectZero];
-    [_changeImage setTitle:NSLocalizedString(@"Change_image_button_title", nil) forState:UIControlStateNormal];    
+    [_changeImage setTitle:NSLocalizedString(@"Change_image_button_title", nil) forState:UIControlStateNormal];
     [_changeImage addTarget:self action:@selector(_changeImageClick:) forControlEvents:UIControlEventTouchUpInside];
     [[AppearanceManager shared] customizeButtonAppearance:_changeImage CoordinatesX:20 Y:_height + _width - _width * 0.85 Width:_width - 40 Radius:10];
-    [_scrollView addSubview:_changeImage];    
+    [_scrollView addSubview:_changeImage];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(myNotificationMethod:)
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
-
+    
 }
 - (void)myNotificationMethod:(NSNotification*)notification
 {
@@ -146,14 +146,14 @@
     return myTextField;
 }
 
-#pragma mark - validate 
+#pragma mark - validate
 
--(void) textFieldDidEndEditing:(UITextField  *)textField 
-{   
+-(void) textFieldDidEndEditing:(UITextField  *)textField
+{
     if(textField ==_firstNameTextField)
     {
         NSString *regex = @"[A-Za-z]+";
-        NSPredicate *nameTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];  
+        NSPredicate *nameTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
         if ([nameTest evaluateWithObject:textField.text] == NO)
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please Enter Valid First Name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -162,8 +162,8 @@
         }
         else
         {
-        textField.layer.borderWidth= 0;
-        flagValidate = YES;
+            textField.layer.borderWidth= 0;
+            flagValidate = YES;
         }
     }
     if(textField ==_lastNameTextField)
@@ -201,7 +201,7 @@
     }
     if(textField ==_phoneTextField &&  flagValidate == YES)
     {
-        textField.layer.borderWidth= 0;       
+        textField.layer.borderWidth= 0;
     }
     
 }
@@ -210,15 +210,15 @@
 {
     if(textField ==_firstNameTextField)
     {
-        [self textFieldBorderStyle:textField];        
+        [self textFieldBorderStyle:textField];
     }
     if(textField ==_lastNameTextField)
     {
         [self textFieldBorderStyle:textField];
     }
     if(textField ==_emailTextField)
-    {        
-        [self textFieldBorderStyle:textField];        
+    {
+        [self textFieldBorderStyle:textField];
     }
     
     if(textField ==_phoneTextField)
@@ -281,7 +281,7 @@
             }
             NSUInteger proposedNewLength = textField.text.length - range.length + string.length;
             if (proposedNewLength > 12)
-            {                
+            {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Numbers all"   delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
                 flagValidate = NO;
@@ -294,7 +294,7 @@
         {
             flagValidate = NO;
             return NO;
-        }        
+        }
         return YES;
     }
     return YES;
@@ -315,7 +315,7 @@
     _scrollView.frame = CGRectMake(0, 0,_width, _height);
 	_scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = YES;
-     NSInteger viewcount = 2;
+    NSInteger viewcount = 2;
     _scrollView.contentSize = CGSizeMake(_width, _height * viewcount);
     [self.view addSubview:_scrollView];
     [self drawbackdroundImage];
@@ -325,7 +325,7 @@
 {
     //FriendDescription* friendDescription = [_fetchedResultsController objectAtIndexPath:_indexPath];
     //_imageView.image = [UIImage imageWithContentsOfFile:friendDescription.imagePath];
-    _imageView = [[UIImageView alloc] initWithImage:_pickedImage];    
+    _imageView = [[UIImageView alloc] initWithImage:_pickedImage];
     [_imageView setContentMode:UIViewContentModeScaleAspectFit];
     _imageView.frame = CGRectMake(0, 0, _width, _height);
     [_scrollView addSubview:_imageView];
@@ -348,23 +348,23 @@
 {
     if(flagValidate)
     {
-    if(_firstNameTextField.textColor == [UIColor blackColor])
-    {        
-        _friendDescription.firstName = _firstNameTextField.text;
-        _friendDescription.lastName = _lastNameTextField.text;
-        _friendDescription.email = _emailTextField.text;
-        _friendDescription.phone = _phoneTextField.text;
-    }
-    NSError* error = nil;
-    NSManagedObjectContext *managedObjectContext = [[CoreDataManager sharedInstance] subContext];
-    [managedObjectContext save:&error];
-    [[CoreDataManager sharedInstance] saveContext];
+        if(_firstNameTextField.textColor == [UIColor blackColor])
+        {
+            _friendDescription.firstName = _firstNameTextField.text;
+            _friendDescription.lastName = _lastNameTextField.text;
+            _friendDescription.email = _emailTextField.text;
+            _friendDescription.phone = _phoneTextField.text;
+        }
+        NSError* error = nil;
+        NSManagedObjectContext *managedObjectContext = [[CoreDataManager sharedInstance] subContext];
+        [managedObjectContext save:&error];
+        [[CoreDataManager sharedInstance] saveContext];
         
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save !" message:@"Changes saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save !" message:@"Changes saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-    
-    ViewController *viewController = [[ViewController alloc] init];
-    [self.navigationController pushViewController:viewController animated:YES];        
+        
+        ViewController *viewController = [[ViewController alloc] init];
+        [self.navigationController pushViewController:viewController animated:YES];
     }
     else
     {

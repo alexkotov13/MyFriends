@@ -27,21 +27,21 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];   
+    [super viewDidLoad];
     
     _width = self.view.frame.size.width;
     _height = self.view.frame.size.height;
     
     self.title = NSLocalizedString(@"Title_for_view_controller", nil);
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-     [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.leftBarButtonItem];
+    [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.leftBarButtonItem];
     UIImage *faceImage = [UIImage imageNamed:@"updateButton"];
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithImage:faceImage style:UIBarButtonItemStylePlain target:self action:@selector(editObject)];
     self.navigationItem.rightBarButtonItem = editButton;
     [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.rightBarButtonItem];
     
-    [[AppearanceManager shared] customizeTopNavigationBarAppearance:self.navigationController.navigationBar];     
-    self.viewScreen = self.view.bounds.size;   
+    [[AppearanceManager shared] customizeTopNavigationBarAppearance:self.navigationController.navigationBar];
+    self.viewScreen = self.view.bounds.size;
     
     _fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController];
     _fetchedResultsController.delegate = self;
@@ -62,17 +62,6 @@
 
 -(void)editObject
 {
-    /*NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-    NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-    
-    [newManagedObject setValue:@"First Name" forKey:@"firstName"];
-    [newManagedObject setValue:@"Last Name" forKey:@"lastName"];
-    //UIImage *image = [UIImage imageNamed:@"photo.jpg"];
-    //[newManagedObject setValue:UIImageJPEGRepresentation(image, SIZE) forKey:@"image"];
-    
-    [self saveContext];*/    
-    
     ListUserViewController *listUserViewController = [[ListUserViewController alloc] init];
     [self.navigationController pushViewController:listUserViewController animated:YES];
 }
@@ -89,29 +78,35 @@
 {
     id  sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
+    
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //    if (editingStyle == UITableViewCellEditingStyleDelete)
+    //    {
+    //        // Delete the managed object for the given index path
+    //        NSManagedObjectContext *context = [[CoreDataManager sharedInstance] managedObjectContext];
+    //        _info = [_fetchedResultsController objectAtIndexPath:indexPath];
+    //        [context deleteObject:_info.firstName];
+    //        _info.isFriend = YES;
+    //        _info.idFriend;
+    _info = [_fetchedResultsController objectAtIndexPath:indexPath];
     if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
-        // Delete the managed object for the given index path
+    {        
+        _info.isFriend = NO;
         NSManagedObjectContext *context = [[CoreDataManager sharedInstance] managedObjectContext];
-        _info = [_fetchedResultsController objectAtIndexPath:indexPath];
-        [context deleteObject:_info];
-        
-//        if (_info.imagePath)
-//        {
-//            NSString* image = _info.imagePath;
-//            NSURL* fullURL = [NSURL fileURLWithPath: image];
-//            [[NSFileManager defaultManager] removeItemAtURL:fullURL error: nil];
-//        }        
-        [[CoreDataManager sharedInstance] saveContext];
-    }    
+        NSManagedObject *managedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        [context deleteObject:managedObject];
+        [context save:nil];
+        [tableView reloadData];
+    }
+    [[CoreDataManager sharedInstance] saveContext];
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{    
+{
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
@@ -119,7 +114,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellSeparatorStyleSingleLine;
     }
-    [self configureCell:cell atIndexPath:indexPath];    
+    [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
@@ -127,11 +122,13 @@
 {
     _info = [_fetchedResultsController objectAtIndexPath:indexPath];
     
-    
-    _smallImage = [_info thumbnail];
-   // _smallImage = [UIImage imageNamed:@"_info.imagePath"];
-    cell.imageView.image = _smallImage; //[_info thumbnail];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@%@%@",_info.firstName, @" ", _info.lastName];
+    if(_info.isFriend)
+    {
+        _smallImage = [_info thumbnail];
+        // _smallImage = [UIImage imageNamed:@"_info.imagePath"];
+        cell.imageView.image = _smallImage; //[_info thumbnail];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@%@%@",_info.firstName, @" ", _info.lastName];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -171,7 +168,7 @@
             [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
-     
+    
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id )sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
