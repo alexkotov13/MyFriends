@@ -33,7 +33,7 @@
     UIImage *_pickedImage;
     FriendDescription* _friendDescription;
     BOOL flagValidate;
-    
+    CGSize keyboardSize;
 }
 
 @property (nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -117,9 +117,9 @@
 }
 - (void)myNotificationMethod:(NSNotification*)notification
 {
-    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    CGPoint newSize = CGPointMake(0, keyboardSize.height + _scrollView.contentSize.height * 0.5);
-    _scrollView.contentOffset = newSize;
+    keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    //CGPoint newSize = CGPointMake(0, keyboardSize.height + _scrollView.contentSize.height * 0.5);
+    //_scrollView.contentOffset = newSize;
     _scrollView.contentSize = CGSizeMake(_width, keyboardSize.height + _height * 2);
 }
 
@@ -146,6 +146,32 @@
     return myTextField;
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    
+    if(textField ==_firstNameTextField)
+    {
+        CGPoint newSize = CGPointMake(0, _firstNameTextField.frame.origin.y + 40);
+        _scrollView.contentOffset = newSize;
+    }
+    if(textField ==_lastNameTextField)
+    {
+        CGPoint newSize = CGPointMake(0, _lastNameTextField.frame.origin.y + 40);
+        _scrollView.contentOffset = newSize;
+    }
+    if(textField ==_emailTextField)
+    {
+        CGPoint newSize = CGPointMake(0, _emailTextField.frame.origin.y + 40);
+        _scrollView.contentOffset = newSize;
+    }
+    
+    if(textField ==_phoneTextField)
+    {
+        CGPoint newSize = CGPointMake(0, _phoneTextField.frame.origin.y + 40);
+        _scrollView.contentOffset = newSize;
+    }
+    return YES;
+}
+
 #pragma mark - validate
 
 -(void) textFieldDidEndEditing:(UITextField  *)textField
@@ -158,10 +184,14 @@
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please Enter Valid First Name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
+            UIImageView *imgforLeft=[[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 20, 20)];
+            [imgforLeft setImage:[UIImage imageNamed:@"error.png"]];
+            textField.leftView = imgforLeft;
             flagValidate = NO;
         }
         else
         {
+            textField.leftView.backgroundColor = [UIColor whiteColor];
             textField.layer.borderWidth= 0;
             flagValidate = YES;
         }
@@ -174,10 +204,14 @@
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please Enter Valid Last Name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
+            UIImageView *imgforLeft=[[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 20, 20)];
+            [imgforLeft setImage:[UIImage imageNamed:@"error.png"]];
+            textField.leftView = imgforLeft;
             flagValidate = NO;
         }
         else
         {
+            textField.leftView.backgroundColor = [UIColor whiteColor];
             textField.layer.borderWidth= 0;
             flagValidate = YES;
         }
@@ -191,10 +225,14 @@
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please Enter Valid Email Address." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
+            UIImageView *imgforLeft=[[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 20, 20)];
+            [imgforLeft setImage:[UIImage imageNamed:@"error.png"]];
+            textField.leftView = imgforLeft;
             flagValidate = NO;
         }
         else
         {
+            textField.leftView.backgroundColor = [UIColor whiteColor];
             textField.layer.borderWidth= 0;
             flagValidate = YES;
         }
@@ -202,8 +240,7 @@
     if(textField ==_phoneTextField &&  flagValidate == YES)
     {
         textField.layer.borderWidth= 0;
-    }
-    
+    }    
 }
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -305,6 +342,7 @@
     textField.borderStyle = UITextBorderStyleLine;
     textField.layer.borderColor = [[UIColor redColor]CGColor];
     textField.layer.borderWidth= 2.0;
+    textField.leftViewMode = UITextFieldViewModeAlways;    
 }
 
 -(void)createScrollView

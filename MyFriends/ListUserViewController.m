@@ -149,7 +149,7 @@
 
 -(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    FriendDescription *info = [_fetchedResultsController objectAtIndexPath:indexPath];
+    //FriendDescription *info = [_fetchedResultsController objectAtIndexPath:indexPath];
     // UIImage *smallImage = [info thumbnail];
     UIImage * image = [UIImage imageNamed:@"photo.png"];
     cell.imageView.image = image;
