@@ -13,6 +13,13 @@
 #define SIZE 35
 
 @interface ListUserViewController ()
+{
+    NSMutableArray *contentList;
+    NSMutableArray *filteredContentList;
+    BOOL isSearching;
+}
+@property (nonatomic, strong) UISearchBar *searchBar;
+@property (strong, nonatomic) UISearchDisplayController *searchBarController;
 @end
 
 @implementation ListUserViewController
@@ -21,8 +28,9 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    [super viewDidLoad];    
     
+    [self drawSearchBar];
     self.title = NSLocalizedString(@"Title_for_list_user_view_controller", nill);
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.leftBarButtonItem];
@@ -108,6 +116,63 @@
     [[CoreDataManager sharedInstance] saveContext];
 }
 
+#pragma mark - UISearchBar
+
+-(void)drawSearchBar
+{
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];
+    [_searchBar sizeToFit];
+    UISearchDisplayController *searchDisplayController= [[UISearchDisplayController alloc] initWithSearchBar:_searchBar                                                                                          contentsController:self];
+    self.searchDisplayController.searchResultsDelegate = self;
+    self.searchDisplayController.searchResultsDataSource = self;
+    self.searchDisplayController.delegate = self;
+    self.searchBar.delegate = self;
+    self.navigationItem.titleView = searchDisplayController.searchBar;
+    filteredContentList = [[NSMutableArray alloc] init];
+    contentList = [[NSMutableArray alloc] init];
+}
+
+- (void)searchTableList {
+    NSString *searchString = _searchBar.text;
+    
+    for (NSString *tempStr in contentList) {
+        NSComparisonResult result = [tempStr compare:searchString options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [searchString length])];
+        if (result == NSOrderedSame) {
+            [filteredContentList addObject:tempStr];
+        }
+    }
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    isSearching = YES;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    NSLog(@"Text change - %d",isSearching);
+    
+    //Remove all objects first.
+    [filteredContentList removeAllObjects];
+    
+    if([searchText length] != 0) {
+        isSearching = YES;
+        [self searchTableList];
+    }
+    else {
+        isSearching = NO;
+    }
+    // [self.tblContentList reloadData];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    NSLog(@"Cancel clicked");
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSLog(@"Search Clicked");
+    [self searchTableList];
+}
+
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -117,8 +182,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    id  sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    id sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    
+    if (isSearching)
+    {
+        return [filteredContentList count];
+    }
+    else 
+    {
+        return [contentList count];
+    }    
     return [sectionInfo numberOfObjects];
+    
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -144,6 +219,13 @@
         cell.accessoryType = UITableViewCellSeparatorStyleSingleLine;
     }
     [self configureCell:cell atIndexPath:indexPath];
+    if (isSearching) {
+        cell.textLabel.text = [filteredContentList objectAtIndex:indexPath.row];
+    }
+    else
+    {
+        cell.textLabel.text = [contentList objectAtIndex:indexPath.row];
+    }
     return cell;
 }
 
@@ -154,6 +236,7 @@
     UIImage * image = [UIImage imageNamed:@"photo.png"];
     cell.imageView.image = image;
     cell.textLabel.text = @"Friend";
+    [contentList addObject:cell.textLabel.text];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

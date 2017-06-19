@@ -18,12 +18,16 @@
     CGFloat _width, _height;
     UIImage *_smallImage;
     FriendDescription *_info;
+    NSMutableArray *contentList;
+    NSMutableArray *filteredContentList;
+    BOOL isSearching;
 }
+@property (nonatomic, strong) UISearchBar *searchBar;
+@property (strong, nonatomic) UISearchDisplayController *searchBarController;
 @end
 
 @implementation ViewController
 @synthesize fetchedResultsController = _fetchedResultsController;
-
 
 - (void)viewDidLoad
 {

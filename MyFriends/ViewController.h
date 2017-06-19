@@ -13,10 +13,8 @@
 #import "CoreDataManager.h"
 #import "AppearanceManager.h"
 
-@interface ViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface ViewController : UITableViewController <NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource>
 
-@property(nonatomic, readwrite) UIButton *exitButton;
-@property(nonatomic, readwrite) UIAlertView *alertExit;
 @property(nonatomic, readwrite) CGSize viewScreen;
 
 @property NSFetchedResultsController *fetchedResultsController;

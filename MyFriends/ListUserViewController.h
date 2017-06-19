@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FriendDescription.h"
 
-@interface ListUserViewController: UITableViewController <NSFetchedResultsControllerDelegate>
+@interface ListUserViewController: UITableViewController <NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource>
 @property(nonatomic, readwrite) CGSize viewScreen;
 
 @property NSFetchedResultsController *fetchedResultsController;

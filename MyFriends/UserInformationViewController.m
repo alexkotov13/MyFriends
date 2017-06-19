@@ -127,7 +127,7 @@
 {
     CameraViewController *cameraViewController = [[CameraViewController alloc]initWithFriendDescription:_friendDescription initWithIndexOfObject:_indexPath];
     [self.navigationController pushViewController:cameraViewController animated:YES];
-}
+} 
 
 -(UITextField*)_drawTextFieldWithText:(NSString*)text placeholderWithTextField:(NSString*)placeholder yTextField:(int)y
 {
@@ -191,7 +191,7 @@
         }
         else
         {
-            textField.leftView.backgroundColor = [UIColor whiteColor];
+            textField.leftView.frame = CGRectMake(0, 0, 0, 0);
             textField.layer.borderWidth= 0;
             flagValidate = YES;
         }
@@ -211,7 +211,7 @@
         }
         else
         {
-            textField.leftView.backgroundColor = [UIColor whiteColor];
+           textField.leftView.frame = CGRectMake(0, 0, 0, 0);
             textField.layer.borderWidth= 0;
             flagValidate = YES;
         }
@@ -232,7 +232,7 @@
         }
         else
         {
-            textField.leftView.backgroundColor = [UIColor whiteColor];
+            textField.leftView.frame = CGRectMake(0, 0, 0, 0);
             textField.layer.borderWidth= 0;
             flagValidate = YES;
         }
