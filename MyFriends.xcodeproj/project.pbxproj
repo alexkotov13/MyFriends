@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9542D6731EF2909A009816F9 /* UserInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9542D6721EF2909A009816F9 /* UserInformationViewController.m */; };
+		958396D41EF7C2FD00057D26 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958396D31EF7C2FD00057D26 /* Security.framework */; };
+		958396D61EF7C30900057D26 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958396D51EF7C30900057D26 /* CFNetwork.framework */; };
+		958396D81EF7C64200057D26 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = 958396D71EF7C64200057D26 /* error.png */; };
 		958710FD1EE84D3C000E0C51 /* AppearanceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 958710FC1EE84D3C000E0C51 /* AppearanceManager.m */; };
 		958710FF1EE84D97000E0C51 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958710FE1EE84D97000E0C51 /* QuartzCore.framework */; };
 		958711011EE84D9F000E0C51 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958711001EE84D9F000E0C51 /* CoreData.framework */; };
@@ -38,11 +41,13 @@
 		95B0C6BF1EEEE63300E3DC58 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95B0C6BE1EEEE63300E3DC58 /* SystemConfiguration.framework */; };
 		95DBEDF51EE9AC2E00F26B4C /* Anna.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95DBEDF11EE9AC2E00F26B4C /* Anna.jpg */; };
 		95DBEDF61EE9AC2E00F26B4C /* Jury.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95DBEDF21EE9AC2E00F26B4C /* Jury.jpg */; };
-		95E2093D1EF3CA0800283D77 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = 95E2093C1EF3CA0800283D77 /* error.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9542D6721EF2909A009816F9 /* UserInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInformationViewController.m; sourceTree = "<group>"; };
+		958396D31EF7C2FD00057D26 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		958396D51EF7C30900057D26 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		958396D71EF7C64200057D26 /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error.png; sourceTree = "<group>"; };
 		958710FB1EE84D3C000E0C51 /* AppearanceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearanceManager.h; sourceTree = "<group>"; };
 		958710FC1EE84D3C000E0C51 /* AppearanceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearanceManager.m; sourceTree = "<group>"; };
 		958710FE1EE84D97000E0C51 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -84,7 +89,6 @@
 		95B0C6BE1EEEE63300E3DC58 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		95DBEDF11EE9AC2E00F26B4C /* Anna.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Anna.jpg; path = Images/Anna.jpg; sourceTree = "<group>"; };
 		95DBEDF21EE9AC2E00F26B4C /* Jury.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Jury.jpg; path = Images/Jury.jpg; sourceTree = "<group>"; };
-		95E2093C1EF3CA0800283D77 /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +96,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95B0C6BF1EEEE63300E3DC58 /* SystemConfiguration.framework in Frameworks */,
 				95B0C6BD1EEEE62B00E3DC58 /* MobileCoreServices.framework in Frameworks */,
+				958396D61EF7C30900057D26 /* CFNetwork.framework in Frameworks */,
+				958396D41EF7C2FD00057D26 /* Security.framework in Frameworks */,
+				95B0C6BF1EEEE63300E3DC58 /* SystemConfiguration.framework in Frameworks */,
 				958711011EE84D9F000E0C51 /* CoreData.framework in Frameworks */,
 				958710FF1EE84D97000E0C51 /* QuartzCore.framework in Frameworks */,
 				958B71E31EE6D94300D3AC24 /* UIKit.framework in Frameworks */,
@@ -152,6 +158,8 @@
 		958B71E11EE6D94300D3AC24 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				958396D51EF7C30900057D26 /* CFNetwork.framework */,
+				958396D31EF7C2FD00057D26 /* Security.framework */,
 				95B0C6BE1EEEE63300E3DC58 /* SystemConfiguration.framework */,
 				95B0C6BC1EEEE62B00E3DC58 /* MobileCoreServices.framework */,
 				958711001EE84D9F000E0C51 /* CoreData.framework */,
@@ -173,7 +181,7 @@
 				958953611EF0067400A38D88 /* photo.png */,
 				95918ED91EEAD164001CF834 /* Yuliya.jpg */,
 				95918ED01EEABDD8001CF834 /* updateButton.png */,
-				95E2093C1EF3CA0800283D77 /* error.png */,
+				958396D71EF7C64200057D26 /* error.png */,
 				9589FECE1EE91FBC00CE3004 /* ViewControllers */,
 				9589FECF1EE91FDF00CE3004 /* CoreData */,
 				958B71FD1EE6D94300D3AC24 /* MainStoryboard_iPad.storyboard */,
@@ -276,7 +284,7 @@
 				95918EDA1EEAD165001CF834 /* Alex.jpg in Resources */,
 				95918EDB1EEAD165001CF834 /* Yuliya.jpg in Resources */,
 				958953621EF0067400A38D88 /* photo.png in Resources */,
-				95E2093D1EF3CA0800283D77 /* error.png in Resources */,
+				958396D81EF7C64200057D26 /* error.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,7 +363,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -380,7 +388,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

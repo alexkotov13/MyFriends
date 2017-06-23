@@ -10,7 +10,7 @@
 #import "UserInformationViewController.h"
 #import "ViewController.h"
 
-@interface CameraViewController : UIViewController
+@interface CameraViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 -(id)initWithFriendDescription:(FriendDescription*) friendDescription initWithIndexOfObject:(NSIndexPath *)indexPath;
 

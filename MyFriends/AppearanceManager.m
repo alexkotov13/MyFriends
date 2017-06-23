@@ -60,9 +60,9 @@
 
 - (void)customizeViewController:(UIView*)view
 {
-    UIColor *topColor = [UIColor colorWithRed:0 green:40.0/255.0 blue:0 alpha:1.0];
-    UIColor *Color = [UIColor colorWithRed:0.0 green:0.5 blue:0 alpha:1.0];
-    UIColor *bottomColor = [UIColor colorWithRed:0 green:50.0/255.0 blue:0 alpha:1.0];
+    UIColor *topColor = [UIColor colorWithRed:92/255.0 green:196/255.0 blue:244/255.0 alpha:1.0];
+    UIColor *Color = [UIColor colorWithRed:0 green:0 blue:0.5  alpha:1.0];
+    UIColor *bottomColor = [UIColor colorWithRed:47/255.0 green:146/255.0 blue:229/255.0  alpha:1.0];
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
     theViewGradient.colors = [NSArray arrayWithObjects: (id)topColor.CGColor, (id)Color.CGColor, (id)bottomColor.CGColor, nil];
     theViewGradient.frame = view.bounds;

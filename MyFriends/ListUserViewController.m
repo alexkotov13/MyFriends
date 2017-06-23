@@ -100,20 +100,11 @@
     [newManagedObject setValue:image forKey:@"thumbnail"];
     [newManagedObject setValue:@YES forKey:@"isFriend"];
     
-    //    appObject=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    //    NSManagedObjectContext *context =[appObject managedObjectContext];
-    //    NSManagedObject *playlistContact;
-    //    NSManagedObjectID *moID = [playlistContact objectID];
-    //    NSString *aString = [[moID URIRepresentation] absoluteString];
-    //    NSArray *theComponents = [aString componentsSeparatedByString:@"/p"];
-    //    NSInteger theZpk = [[theComponents lastObject] intValue];
-    //    playlistId=[NSString stringWithFormat:@"%ld",(long)theZpk];
-    
     NSManagedObjectID *moID = [newManagedObject objectID];
     NSString *aString = [[moID URIRepresentation] absoluteString];
     [newManagedObject setValue:aString forKey:@"idFriend"];
     
-    [[CoreDataManager sharedInstance] saveContext];
+    [[CoreDataManager sharedInstance] saveContext];      
 }
 
 #pragma mark - UISearchBar

@@ -18,9 +18,9 @@
     CGFloat _width, _height;
     UIImage *_smallImage;
     FriendDescription *_info;
-    NSMutableArray *contentList;
-    NSMutableArray *filteredContentList;
-    BOOL isSearching;
+    NSMutableArray *_contentList;
+    NSMutableArray *_filteredContentList;
+    BOOL _isSearching;
 }
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (strong, nonatomic) UISearchDisplayController *searchBarController;
@@ -36,27 +36,12 @@
     _width = self.view.frame.size.width;
     _height = self.view.frame.size.height;
     
-    self.title = NSLocalizedString(@"Title_for_view_controller", nil);
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.leftBarButtonItem];
-    UIImage *faceImage = [UIImage imageNamed:@"updateButton"];
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithImage:faceImage style:UIBarButtonItemStylePlain target:self action:@selector(editObject)];
-    self.navigationItem.rightBarButtonItem = editButton;
-    [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.rightBarButtonItem];
+   
     
-    [[AppearanceManager shared] customizeTopNavigationBarAppearance:self.navigationController.navigationBar];
-    self.viewScreen = self.view.bounds.size;
-    
-    _fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController];
-    _fetchedResultsController.delegate = self;
-    [NSFetchedResultsController deleteCacheWithName:@"View"];
-    NSError *error;
-	if (![[self fetchedResultsController] performFetch:&error])
-    {
-		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-		exit(-1);  // Fail
-	}
+    [self setFetchedController];
+    [self drawButton];
 }
+ 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -64,10 +49,50 @@
     self.navigationController.navigationBarHidden = NO;
 }
 
--(void)editObject
+-(void)drawButton
 {
-    ListUserViewController *listUserViewController = [[ListUserViewController alloc] init];
-    [self.navigationController pushViewController:listUserViewController animated:YES];
+    self.title = NSLocalizedString(@"Title_for_view_controller", nil);
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.leftBarButtonItem];
+    //UIImage *faceImage = [UIImage imageNamed:@"updateButton"];
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(editObject)];
+    self.navigationItem.rightBarButtonItem = editButton;
+    [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.rightBarButtonItem];
+    
+    [[AppearanceManager shared] customizeTopNavigationBarAppearance:self.navigationController.navigationBar];
+    self.viewScreen = self.view.bounds.size;
+}
+
+-(void)setFetchedController
+{
+    _fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController];
+    _fetchedResultsController.delegate = self;
+    [NSFetchedResultsController deleteCacheWithName:@"View"];
+    NSError *error;
+    if (![[self fetchedResultsController] performFetch:&error])
+    {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        exit(-1);  // Fail
+    }
+}
+
+-(void)editObject
+{      
+    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
+    NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+    [newManagedObject setValue:@"Friend" forKey:@"firstName"];
+    [newManagedObject setValue:@"" forKey:@"lastName"];
+    [newManagedObject setValue:@"photo.png" forKey:@"imagePath"];
+    UIImage *image = [UIImage imageNamed:@"photo.png"];
+    [newManagedObject setValue:image forKey:@"thumbnail"];
+    [newManagedObject setValue:@YES forKey:@"isFriend"];
+    
+    NSManagedObjectID *moID = [newManagedObject objectID];
+    NSString *aString = [[moID URIRepresentation] absoluteString];
+    [newManagedObject setValue:aString forKey:@"idFriend"];
+    
+    [[CoreDataManager sharedInstance] saveContext];
 }
 
 
@@ -97,7 +122,7 @@
     //        _info.idFriend;
     _info = [_fetchedResultsController objectAtIndexPath:indexPath];
     if (editingStyle == UITableViewCellEditingStyleDelete)
-    {        
+    {
         _info.isFriend = NO;
         NSManagedObjectContext *context = [[CoreDataManager sharedInstance] managedObjectContext];
         NSManagedObject *managedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -129,8 +154,7 @@
     if(_info.isFriend)
     {
         _smallImage = [_info thumbnail];
-        // _smallImage = [UIImage imageNamed:@"_info.imagePath"];
-        cell.imageView.image = _smallImage; //[_info thumbnail];
+        cell.imageView.image = _smallImage;
         cell.textLabel.text = [NSString stringWithFormat:@"%@%@%@",_info.firstName, @" ", _info.lastName];
     }
 }

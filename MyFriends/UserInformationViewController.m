@@ -20,7 +20,6 @@
 @interface UserInformationViewController ()  <UIScrollViewDelegate, UITextFieldDelegate,NSFetchedResultsControllerDelegate>
 {
     NSIndexPath* _indexPath;
-    NSMutableArray* _pages;
     NSInteger _countOfObjects;
     CGFloat _width, _height;
     UIToolbar* _toolBar;
@@ -32,8 +31,8 @@
     UIButton * _changeImage;
     UIImage *_pickedImage;
     FriendDescription* _friendDescription;
-    BOOL flagValidate;
-    CGSize keyboardSize;
+    BOOL _flagValidate;
+    CGSize _keyboardSize;
 }
 
 @property (nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -43,8 +42,6 @@
 @end
 
 @implementation UserInformationViewController
-
-//@synthesize fetchedResultsController = _fetchedResultsController;
 
 - (id)initWithImage:(UIImage *)image initWithFriendDescription:(FriendDescription*) friendDescription initWithIndexOfObject:(NSIndexPath *)indexPath
 {
@@ -67,18 +64,59 @@
 {
     [super viewDidLoad];
     
-    flagValidate = YES;
+    _flagValidate = YES;
     _width = self.view.frame.size.width;
     _height = self.view.frame.size.height;
     
     [[AppearanceManager shared] customizeViewController:self.view];
     [self createScrollView];
-    
     [self setFetchedController];
+    [self drawButton];
+    [self createTextField];
+    [self changeImage];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(myNotificationMethod:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+}
+
+-(void)changeImage
+{
+    _changeImage = [[UIButton alloc]initWithFrame:CGRectZero];
+    [_changeImage setTitle:NSLocalizedString(@"Change_image_button_title", nil) forState:UIControlStateNormal];
+    [_changeImage addTarget:self action:@selector(_changeImageClick:) forControlEvents:UIControlEventTouchUpInside];
+    [[AppearanceManager shared] customizeButtonAppearance:_changeImage CoordinatesX:20 Y:_height + _width - _width * 0.85 Width:_width - 40 Radius:10];
+    [_scrollView addSubview:_changeImage];
+}
+
+-(void)createTextField
+{
+    _firstNameTextField = [self _drawTextFieldWithText:_friendDescription.firstName placeholderWithTextField:NSLocalizedString(@"FirstNameTextView_text", nil) yTextField:_height + _width - _width * 0.6];
+    _lastNameTextField = [self _drawTextFieldWithText:_friendDescription.lastName placeholderWithTextField:NSLocalizedString(@"LastNameTextView_text", nil) yTextField:_height +_width - _width * 0.4];
+    _emailTextField = [self _drawTextFieldWithText:_friendDescription.email placeholderWithTextField:NSLocalizedString(@"EmailTextView_text", nil) yTextField:_height + _width - _width * 0.2];
+    _phoneTextField = [self _drawTextFieldWithText:_friendDescription.phone placeholderWithTextField:NSLocalizedString(@"PhoneTextView_text", nil) yTextField:_height + _width];
+}
+
+-(void)setFetchedController
+{
+    _fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController];
+    _fetchedResultsController.delegate = self;
+    [NSFetchedResultsController deleteCacheWithName:@"View"];
+    NSError *error;
+    if (![[self fetchedResultsController] performFetch:&error])
+    {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        exit(-1);  // Fail
+    }
+    _countOfObjects = _fetchedResultsController.fetchedObjects.count;
+}
+
+-(void)drawButton
+{
     self.title = NSLocalizedString(@"Title_for_user_information_view_controller", nill);
-    
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(saveObject)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cencelClick)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.leftBarButtonItem];
     
@@ -87,47 +125,21 @@
     [[AppearanceManager shared] customizeBackBarButtonAppearanceForNavigationBar:self.navigationItem.rightBarButtonItem];
     
     [[AppearanceManager shared] customizeTopNavigationBarAppearance:self.navigationController.navigationBar];
-    
-    _fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController];
-    _fetchedResultsController.delegate = self;
-    [NSFetchedResultsController deleteCacheWithName:@"View"];
-    NSError *error;
-	if (![[self fetchedResultsController] performFetch:&error])
-    {
-		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-		exit(-1);  // Fail
-	}
-    
-    _firstNameTextField = [self _drawTextFieldWithText:_friendDescription.firstName placeholderWithTextField:NSLocalizedString(@"FirstNameTextView_text", nil) yTextField:_height + _width - _width * 0.6];
-    _lastNameTextField = [self _drawTextFieldWithText:_friendDescription.lastName placeholderWithTextField:NSLocalizedString(@"LastNameTextView_text", nil) yTextField:_height +_width - _width * 0.4];
-    _emailTextField = [self _drawTextFieldWithText:_friendDescription.email placeholderWithTextField:NSLocalizedString(@"EmailTextView_text", nil) yTextField:_height + _width - _width * 0.2];
-    _phoneTextField = [self _drawTextFieldWithText:_friendDescription.phone placeholderWithTextField:NSLocalizedString(@"PhoneTextView_text", nil) yTextField:_height + _width];
-    
-    _changeImage = [[UIButton alloc]initWithFrame:CGRectZero];
-    [_changeImage setTitle:NSLocalizedString(@"Change_image_button_title", nil) forState:UIControlStateNormal];
-    [_changeImage addTarget:self action:@selector(_changeImageClick:) forControlEvents:UIControlEventTouchUpInside];
-    [[AppearanceManager shared] customizeButtonAppearance:_changeImage CoordinatesX:20 Y:_height + _width - _width * 0.85 Width:_width - 40 Radius:10];
-    [_scrollView addSubview:_changeImage];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(myNotificationMethod:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
-    
 }
+
 - (void)myNotificationMethod:(NSNotification*)notification
 {
-    keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    _keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     //CGPoint newSize = CGPointMake(0, keyboardSize.height + _scrollView.contentSize.height * 0.5);
     //_scrollView.contentOffset = newSize;
-    _scrollView.contentSize = CGSizeMake(_width, keyboardSize.height + _height * 2);
+    _scrollView.contentSize = CGSizeMake(_width, _keyboardSize.height + _height * 2);
 }
 
 -(void)_changeImageClick:(id)sender
 {
     CameraViewController *cameraViewController = [[CameraViewController alloc]initWithFriendDescription:_friendDescription initWithIndexOfObject:_indexPath];
     [self.navigationController pushViewController:cameraViewController animated:YES];
-} 
+}
 
 -(UITextField*)_drawTextFieldWithText:(NSString*)text placeholderWithTextField:(NSString*)placeholder yTextField:(int)y
 {
@@ -142,6 +154,7 @@
     myTextField.placeholder = placeholder;
     myTextField.delegate = self;
     [myTextField resignFirstResponder];
+    myTextField.keyboardType = UIKeyboardTypeDefault;
     [_scrollView addSubview:myTextField];
     return myTextField;
 }
@@ -187,13 +200,13 @@
             UIImageView *imgforLeft=[[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 20, 20)];
             [imgforLeft setImage:[UIImage imageNamed:@"error.png"]];
             textField.leftView = imgforLeft;
-            flagValidate = NO;
+            _flagValidate = NO;
         }
         else
         {
             textField.leftView.frame = CGRectMake(0, 0, 0, 0);
             textField.layer.borderWidth= 0;
-            flagValidate = YES;
+            _flagValidate = YES;
         }
     }
     if(textField ==_lastNameTextField)
@@ -207,13 +220,13 @@
             UIImageView *imgforLeft=[[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 20, 20)];
             [imgforLeft setImage:[UIImage imageNamed:@"error.png"]];
             textField.leftView = imgforLeft;
-            flagValidate = NO;
+            _flagValidate = NO;
         }
         else
         {
-           textField.leftView.frame = CGRectMake(0, 0, 0, 0);
+            textField.leftView.frame = CGRectMake(0, 0, 0, 0);
             textField.layer.borderWidth= 0;
-            flagValidate = YES;
+            _flagValidate = YES;
         }
     }
     
@@ -228,19 +241,19 @@
             UIImageView *imgforLeft=[[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 20, 20)];
             [imgforLeft setImage:[UIImage imageNamed:@"error.png"]];
             textField.leftView = imgforLeft;
-            flagValidate = NO;
+            _flagValidate = NO;
         }
         else
         {
             textField.leftView.frame = CGRectMake(0, 0, 0, 0);
             textField.layer.borderWidth= 0;
-            flagValidate = YES;
+            _flagValidate = YES;
         }
     }
-    if(textField ==_phoneTextField &&  flagValidate == YES)
+    if(textField ==_phoneTextField &&  _flagValidate == YES)
     {
         textField.layer.borderWidth= 0;
-    }    
+    }
 }
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -321,15 +334,15 @@
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Numbers all"   delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
-                flagValidate = NO;
+                _flagValidate = NO;
                 return NO;
             }
-            flagValidate = YES;
+            _flagValidate = YES;
             return YES;
         }
         else
         {
-            flagValidate = NO;
+            _flagValidate = NO;
             return NO;
         }
         return YES;
@@ -342,7 +355,7 @@
     textField.borderStyle = UITextBorderStyleLine;
     textField.layer.borderColor = [[UIColor redColor]CGColor];
     textField.layer.borderWidth= 2.0;
-    textField.leftViewMode = UITextFieldViewModeAlways;    
+    textField.leftViewMode = UITextFieldViewModeAlways;
 }
 
 -(void)createScrollView
@@ -369,22 +382,9 @@
     [_scrollView addSubview:_imageView];
 }
 
--(void)setFetchedController
-{
-    _fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController];
-    [NSFetchedResultsController deleteCacheWithName:@"Root"];
-    NSError *error;
-    if (![[self fetchedResultsController] performFetch:&error])
-    {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        exit(-1);  // Fail
-    }
-    _countOfObjects = _fetchedResultsController.fetchedObjects.count;
-}
-
 -(void)saveObject
 {
-    if(flagValidate)
+    if(_flagValidate)
     {
         if(_firstNameTextField.textColor == [UIColor blackColor])
         {
@@ -411,7 +411,7 @@
     }
 }
 
--(void)cencelClick:(id)sender
+-(void)cencelClick
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info" message:@"Changes don't saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];

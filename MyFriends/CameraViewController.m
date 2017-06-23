@@ -10,11 +10,11 @@
 
 CGSize view;
 
-@interface CameraViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface CameraViewController ()
 {
-    UIButton *library;
-    UIButton *camera;
-    UIButton *cencel;
+    UIButton *_library;
+    UIButton *_camera;
+    UIButton *_cencel;
     NSIndexPath* _indexPath;
     UIImage* _pickedImage;
     FriendDescription* _friendDescription;
@@ -52,23 +52,23 @@ CGSize view;
 
 -(void)drawButton
 {
-    library = [[UIButton alloc]initWithFrame:CGRectZero];
-    [library setTitle:NSLocalizedString(@"Choose_library_button", nil) forState:UIControlStateNormal];
-    [self.view addSubview:library];
-    [library addTarget:self action:@selector(libraryButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [[AppearanceManager shared] customizeButtonAppearance:library CoordinatesX:view.width / 4 - 60 Y:view.height / 4  Width:view.width - 40 Radius:10];
+    _library = [[UIButton alloc]initWithFrame:CGRectZero];
+    [_library setTitle:NSLocalizedString(@"Choose_library_button", nil) forState:UIControlStateNormal];
+    [self.view addSubview:_library];
+    [_library addTarget:self action:@selector(libraryButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [[AppearanceManager shared] customizeButtonAppearance:_library CoordinatesX:view.width / 4 - 60 Y:view.height / 4  Width:view.width - 40 Radius:10];
     
-    camera = [[UIButton alloc]initWithFrame:CGRectZero];
-    [camera setTitle:NSLocalizedString(@"Choose_camera_button", nil) forState:UIControlStateNormal];
-    [self.view addSubview:camera];
-    [camera addTarget:self action:@selector(cameraButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [[AppearanceManager shared] customizeButtonAppearance:camera CoordinatesX:view.width / 4 - 60 Y:view.height / 2.2 Width:view.width - 40 Radius:10];
+    _camera = [[UIButton alloc]initWithFrame:CGRectZero];
+    [_camera setTitle:NSLocalizedString(@"Choose_camera_button", nil) forState:UIControlStateNormal];
+    [self.view addSubview:_camera];
+    [_camera addTarget:self action:@selector(cameraButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [[AppearanceManager shared] customizeButtonAppearance:_camera CoordinatesX:view.width / 4 - 60 Y:view.height / 2.2 Width:view.width - 40 Radius:10];
     
-    cencel = [[UIButton alloc]initWithFrame:CGRectZero];
-    [cencel setTitle:NSLocalizedString(@"Cancel_button_title", nil) forState:UIControlStateNormal];
-    [self.view addSubview:cencel];
-    [cencel addTarget:self action:@selector(cencelClick:) forControlEvents:UIControlEventTouchUpInside];
-    [[AppearanceManager shared] customizeButtonAppearance:cencel CoordinatesX:view.width / 4 - 60 Y:view.height / 1.5 Width:view.width - 40 Radius:10];
+    _cencel = [[UIButton alloc]initWithFrame:CGRectZero];
+    [_cencel setTitle:NSLocalizedString(@"Cancel_button_title", nil) forState:UIControlStateNormal];
+    [self.view addSubview:_cencel];
+    [_cencel addTarget:self action:@selector(cencelClick:) forControlEvents:UIControlEventTouchUpInside];
+    [[AppearanceManager shared] customizeButtonAppearance:_cencel CoordinatesX:view.width / 4 - 60 Y:view.height / 1.5 Width:view.width - 40 Radius:10];
 }
 
 - (void)libraryButtonClick:(id)sender
@@ -151,8 +151,7 @@ CGSize view;
 
 -(void)cencelClick:(id)sender
 {
-    UserInformationViewController *userInformationViewController = [[UserInformationViewController alloc] init];
-    [self.navigationController pushViewController:userInformationViewController animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
